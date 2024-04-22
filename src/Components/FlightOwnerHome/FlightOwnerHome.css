@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400&display=swap');
+
+#background-img{
+    width: 100vw;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+}
+.sky-img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.background-img h1 {
+    position: absolute;
+    margin-left: 8%;
+    font-size: 5em;
+    text-align: center;
+    color: rgb(0, 0, 0);
+}
+#fun-div{
+    width: 100vw;
+    height: 30vh;
+    display: flex;
+    position: absolute;
+    bottom: 0;
+}
+.fun-div .child-div {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.owner-function:hover{
+    cursor: pointer;
+    background-color: rgb(166, 214, 254);
+}
+.owner-function{
+    height: 90%;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: 2px 2px 14px rgb(154, 147, 147);
+}
+.fun-img{
+    height: 50%;
+    width: 50%;
+}
+
+
+
+@media (max-width: 1020px) {
+    h1{
+        font-size: 30px;
+    }
+    #background-img{
+        height: 50vh;
+    }
+    .fun-div{
+        height: 45vh;
+        width: 70vw;
+        flex-direction: column;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .fun-div .child-div{
+        height: 50%;
+        width: 100%;
+    }
+   
+    .container-main{
+        width: 95%;
+    }
+    .link-btn{
+        display: block;
+        background-color: #ffffff;
+    }
+}

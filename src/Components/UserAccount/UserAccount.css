@@ -1,0 +1,33 @@
+.get-User{
+    margin-left: 20%;
+}
+.get-bookings,.get-bookings-history{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.more-profile-option{
+    display: none;
+}
+.get-User-div{
+    width: 70%;
+}
+@media (max-width: 900px) {
+.account-sidebar{
+    display: none;
+    width: 100%;
+}
+.get-User {
+    margin-left: 5%;
+}
+.more-profile-option{
+    display: flex;
+    width: 100%;
+}
+.right-arrow,.left-arrow{
+    width: 30px;
+    height: auto;
+    margin: 10px;
+}
+
+}

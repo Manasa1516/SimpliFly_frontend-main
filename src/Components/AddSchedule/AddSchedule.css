@@ -1,0 +1,31 @@
+.add-schedule-div{
+    box-shadow: 2px 2px 14px rgb(216, 205, 205);
+    padding: 10px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    background-color: #c2e0f5;
+}
+.add-schedule-form{
+    display: flex;
+    flex-direction: column;
+}
+.source-airport-div,.destination-airport-div,.departure-time-div,.flight-detail-div{
+    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.add-schedule-form .flight-detail-div{
+    width: 96%;
+}
+.add-schedule-btn{
+    margin: 10px;
+    border-radius: 6px;
+    width: 35%;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: white;
+}
+.add-schedule-btn:hover{
+    background-color: rgb(135, 195, 248);
+}

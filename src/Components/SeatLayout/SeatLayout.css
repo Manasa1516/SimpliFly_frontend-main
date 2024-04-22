@@ -1,0 +1,153 @@
+.seat-layout{
+    margin-top: 5%;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+}
+.seat-color-div{
+    width: 25%;
+    height: 100%;
+    background-color: rgb(197, 226, 244);
+}
+.seat-availability{
+  margin-left: 15%;
+  margin-top: 5%;
+  font-weight: bold;
+}
+.booked-seats,.avilable-seats,.selected-seats{
+  height: 20px;
+  width: 20px;
+  border-radius: 8px;
+  background-color: aqua;
+  color: white;
+}
+.booked-seats{
+  border: solid 4px red;
+}
+.selected-seats{
+  border: solid 4px rgb(121, 184, 26);
+}
+.seat-layout-div{
+    width: 55%;
+    height: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.seat-selection{
+    height: 90%;
+    width: 28%;
+    border-radius: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42%;
+    box-shadow: 2px 2px 14px rgb(70, 63, 63);
+}
+.seat-arrangement{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr); 
+    grid-template-rows: repeat(8, 10%);
+    grid-gap: 2px; 
+    width: 90%;
+    height: 90%;
+    padding: 8px;
+    margin: 10px;
+    margin-left: 5px;
+    
+}
+#seats{
+    background-color: rgb(93, 177, 230);
+    border: 1px solid black;
+    height: 70%;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    justify-content: center;
+}
+.passage{
+    height: 90%;
+    width: 1%;
+    background-color: rgb(1, 91, 130);
+    position: absolute;
+    left: 41.2%;
+}
+.booked {
+    background-color: red; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    
+  }
+  .selected {
+    background-color: rgb(55, 191, 93); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+  }
+#seats:hover{
+  cursor: pointer;
+}
+
+  .pay-btn{
+    width: 30%;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  border-radius: 6px;
+  background-color: rgb(250, 79, 79);
+  color: white;
+  box-shadow: 2px 2px 8px rgb(145, 143, 143);
+  }
+  .payments{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #c7effa;
+    display: flex;
+    justify-content: center;
+  }
+  .payment-form-div{
+    width: 30%;
+    height: 60%;
+    border-radius: 6px;
+    padding: 20px;
+    background-color: white;
+  }
+.book-ticket-btn{
+    width: 100%;
+    background-color: rgb(245, 91, 25);
+    box-shadow: 2px 2px 8px rgb(145, 143, 143);
+    color: white;
+    font-weight: bold;
+}
+
+@media (max-width: 900px) {
+  .seat-layout {
+    margin-top: 20%;
+}
+.seat-color-div{
+  display: none;
+}
+.seat-layout-div{
+  flex-direction: column;
+  width: 100%;
+}
+.seat-selection{
+  width: 80%;
+}
+.pay-btn{
+  width: 50%;
+  margin: 10px;
+}
+.passage{
+  width: 4%;
+}
+.payment-form-div{
+  width: 80%;
+}
+}
