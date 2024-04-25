@@ -1,155 +1,241 @@
 .home-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 50px;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    padding: 0 20px;
     background-image: url('./Images/background.png');
-    background-size: cover; /* or 'contain' depending on your needs */
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     opacity: 0.8;
-    /* Add any other styling you need */
-    /* Make sure to adjust other styles as needed for visibility */
-}
-
-.background-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1; 
   }
+  
+  .background-img {
+    opacity: 0.8;
+  }
+  
   .flight-search-container {
-    margin: 50px auto; /* Center the box horizontally */
-    width: 80%; /* Adjust the width as needed */
-    padding: 20px;
+    margin: 0 auto; /* Center the box horizontally */
+    width: 70%; /* Adjust the width as needed */
+    padding: 50px;
     background-color: white;
-    border-radius: 6px;
-    box-shadow: 8px 8px 10px rgba(69, 67, 67, 0.5);
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(69, 67, 67, 0.5);
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around; /* Distribute items evenly */
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    opacity: 1;
+    gap: 30px;
 }
 
-.booking-form-container {
+.source-destination-div{
+    margin-left: 10px;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-right: 70px;
+    text-align: left;
 }
-
-.source-destination-div {
+.depart-date-div{
+    margin-left: 10px;
     display: flex;
-    justify-content: space-between;
-    width: 100%;
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: right;
+}
+.passenger-count-div{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.passenger-count-div{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.seatClass {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-.departure-div,
-.arrival-div,
-.depart-date-div,
-.return-date-div,
-.passenger-count-div {
-    flex: 0 0 40%; /* Adjust the width as needed */
-    margin: 10px;
+.source-destination-div label,
+.depart-date-div label,
+.passenger-count-div label,
+.seatClass label {
+    margin-left: 20px;
+    flex: 0 0 30%; /* Adjust the width of the label as needed */
+    text-align: right;
+    margin-right: 20px; /* Add some spacing between label and input */
+    font-family: Arial, sans-serif; /* Change the font family */
+    font-size: 14px; /* Change the font size */
+    font-style: Bold;
 }
 
 
-.date-select {
-    width: 100%;
+.source-destination-div input,
+.depart-date-div input,
+.passenger-count-div input,
+.seatClass select {
+    flex: 1;
+    padding: 10px; /* Adjust the padding as needed */
 }
 
 .adult-div,
 .child-div {
-    flex: 0 0 48%;
-    margin: 10px;
-}
-
-.seatClass {
-    width: 100%;
-    margin: 15px;
-}
-
-.form-btn {
-    width: 100%;
-    text-align: center;
-}
-
-
-
-@media (max-width: 900px) {
-.home-main{
+    display: flex;
+    align-items: center;
     flex-direction: column;
-    height: 150vh;
-    padding-top: 20%;
-    justify-content: flex-start;
 }
-.background-img {
-    width: 100%;
-    height: 100%;
+
+.adult-div label,
+.child-div label {
+    margin-right: 15px; /* Add some spacing between label and input */
+}
+
+.adult-div input,
+.child-div input {
+    width: 50px; /* Adjust the width of the input as needed */
+    padding: 20px; /* Adjust the padding as needed */
+}
+
+.Services{
+    margin-top: 100;
+}
+.depart-date-div {
+    display: flex;
+    flex-direction: column;
+    height: 68px;
+    margin-bottom: 0px;
+    margin-right: 20px;
   }
-.home-left,.flight-search-container{
-    margin: 10px;
-    width: 90%;
-    height: 35%;
-}
-.msg{
-    font-size: 40px;
-    color: rgb(10, 55, 88);
-    text-shadow: 5px 5px 4px rgba(33, 46, 70, 0.5);
-}
-
-.more-msg{
-    font-size: 22px;
-}
-.booking-form-container{
-    margin: 10px;
-}
-.source-destination-div{
+  .depart-date-div input{
+    border-color: black;
+  }
+  
+  .depart-date-div label {
+    text-align: right;
+    margin-bottom: 2px; /* Adjust as needed */
+    margin-left: 2px;
+  }
+  .passenger-count-div {
+    width: 90px;
+    display: flex;
     flex-direction: column;
-}
-.departure-div,.arrival-div,.date-select{
-    width: 90%;
-}
-.passenger-count-div{
-    flex-direction: column;
-}
-.adult-div,.child-div{
-    margin: 10px;
-}
-}
+    height: 30px;
+    margin-bottom: 35px;
+  }
+  .departure-div{
+    margin-right: 20px;
+  }
+  .departure-div input{
+    border-color: black;
+  }
+  .arrival-div{
+    margin-right: 20px;
+  }
+  .arrival-div input{
+    border-color: black;
+  }
+  .departure-div label{
+    margin-left: 20px;
+  }
+  .passenger-count-div-adult{
+    margin-right: 20px;
+  }
+  .passenger-count-div-adult input{
+    border-color: black;
+  }
+  .passenger-count-div-child{
+    margin-right: -30px;
+  }
+  .passenger-count-div-child input{
+    border-color: black;
+  }
+  .Search-flights-text{
+    margin-bottom: 30px;
+    margin-left: 380px;
+    margin-top: -30px;
+    font-weight: bold;
+    color: #aa8001;
+    
+  }
+  #itemlist option{
+    font-weight: bold;
+  }
+ .show-flights button{
+    width: 200px;
+    height: 50px;
+    margin-left: 400px;
+    background-color: #f5df69;
+ }
+ .show-flights button:hover{
+    background-color: gold;
+ }
+ @media (min-width: 769px) {
+    .home-main {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 50px;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      padding: 0 20px;
+      background-image: url('./Images/background.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      opacity: 0.8;
+    }
+  
+    .background-img {
+      opacity: 0.8;
+    }
+  
+    .flight-search-container {
+        margin: 0 auto; /* Center the box horizontally */
+        width: 70%; /* Adjust the width as needed */
+        padding: 50px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 10px 10px 10px rgba(69, 67, 67, 0.5);
+        display: flex;
+        justify-content: center; /* Center items horizontally */
+        align-items: center; /* Center items vertically */
+        opacity: 1;
+        gap: 30px; /* Remove box shadow for mobile view */
+    }
 
-@media (min-height: 900px) {
-    .home-main{
-        flex-direction: column;
-        height: 110vh;
-        padding-top: 20%;
-        justify-content: flex-start;
+    .source-destination-div {
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        margin-right: 70px;
+        text-align: left;
+      }
+  }
+  @media (max-width: 768px) {
+    .home-main {
+      /* Add mobile styles here */
     }
-    .home-left,.flight-search-container{
-        margin: 10px;
-        width: 90%;
-        height: 25%;
+  
+    .flight-search-container {
+      /* Add mobile styles here */
     }
-    .msg{
-        font-size: 40px;
-        
+  
+    .source-destination-div {
+      /* Add mobile styles here */
     }
-    
-    .more-msg{
-        font-size: 22px;
-    }
-    .booking-form-container{
-        margin: 10px;
-    }
-    .source-destination-div{
-        flex-direction: column;
-    }
-    .departure-div,.arrival-div,.date-select{
-        width: 40%;
-    }
-    .passenger-count-div{
-        flex-direction: column;
-    }
-    .adult-div,.child-div{
-        margin: 10px;
-    }
-    }
-    
+  
+    /* Add other mobile styles here */
+  }
+ 
+  
+

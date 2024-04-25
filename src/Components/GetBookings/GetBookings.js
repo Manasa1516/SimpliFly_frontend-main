@@ -9,6 +9,8 @@ export default function GetBookings() {
   var [bookings, setBooking] = useState([]);
   var userId = sessionStorage.getItem("userId");
   const token = sessionStorage.getItem("token");
+  const [currentPage, setCurrentPage] = useState(1);
+  const bookingsPerPage = 4;
 
   useEffect(() => {
     const httpHeader = {
@@ -102,10 +104,16 @@ export default function GetBookings() {
     }
   };
 
+  const indexOfLastBooking = currentPage * bookingsPerPage;
+  const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
+  const currentBookings = bookings.slice(indexOfFirstBooking, indexOfLastBooking);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="bookings-div">
       <div className="get-bookings-div">
-        {bookings.map((booking, index) => (
+        {currentBookings.map((booking, index) => (
           <div key={index} className="booking-list-div">
             <div className="booking-schedule-details">
               <div className="booking-flight-detail">
@@ -158,6 +166,14 @@ export default function GetBookings() {
             </div>
           </div>
         ))}
+        <div className='pagination'>
+          {bookings.length > bookingsPerPage && (
+            <button onClick={() => paginate(currentPage - 1)}>Previous</button>
+          )}
+          {bookings.length > indexOfLastBooking && (
+            <button onClick={() => paginate(currentPage + 1)}>Next</button>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
-import background from "../../Assets/Images/plane.jpg";
 import userImg from "../../Assets/Images/user.png";
 import key from "../../Assets/Images/key.png";
 import { Link, useNavigate } from "react-router-dom";
+import loginImage from "./Images/image.png";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -111,9 +111,11 @@ export default function Login() {
   return (
     <div>
       <div className="login-page">
-        <img src={background} className="background-img" />
         <div className="login-div">
-          <h3>Log into your account</h3>
+          <h3></h3>
+          <h3></h3>
+          <h3>Login</h3>
+          <div className="login-img"><img src={loginImage} alt="Login Image" /></div>
           <form>
             <div className="username-div">
               <img src={userImg} />
@@ -138,10 +140,10 @@ export default function Login() {
               />
             </div>
             <input type="submit" value="Login" id="login-btn" onClick={Login} />
-            <h6 className="forgot-password" onClick={()=>navigate('/updatePassword')}>forgot password</h6>
+            <h6 className="forgot-password" onClick={()=>navigate('/updatePassword')}>forgot password?</h6>
           </form>
           <p className="register-text">
-            Don't have account, register as-<br/>
+            Don't have account? register as-<br/>
             <span id="registerhere-text">
               <button className='register-option-btn' onClick={()=>navigate('/registerUser')}>Customer</button>
               <button className='register-option-btn' onClick={()=>navigate('/register')}>FlightOwner</button>

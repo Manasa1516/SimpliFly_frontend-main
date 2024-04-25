@@ -256,7 +256,6 @@ export default function BookingDetails() {
       <button onClick={BookSeats} className="book-seats-btn">
         Book Seats
       </button>
-      <Footer />
     </div>
   );
 }

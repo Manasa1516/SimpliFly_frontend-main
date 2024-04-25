@@ -195,7 +195,7 @@ export default function SeatLayout() {
                 CVV
               </label>
               <input
-                type="text"
+                type="password"
                 className="form-control"
                 id="cvv"
                 value={cvv}

@@ -1,12 +1,4 @@
-.get-flight-div{
-    margin-top: 5%;
-  padding: 10px;
-  height: 100%;
-  width: 100%;
-  box-shadow: 2px 2px 14px rgb(216, 205, 205);
-  border-radius: 5px;
-  background-color: #c2e0f5;
-}
+
 .flight-list-div{
     width: 98%;
     margin: 10px;
@@ -39,11 +31,15 @@
     width: 30px;
     margin: 10px;
 }
+.flight-number{
+    margin-top: 10px;
+    margin-right: 10px;
+}
 .other-detail-div{
     display: flex;
     justify-content: space-between;
 }
-.total-seats,.base-price,.flight-number{
+.total-seats,.base-price,.status{
     margin: 10px;
     font-size: 18px;
 }
@@ -53,3 +49,26 @@
         width: 90%;
     }
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: gold;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+  }
+  
+  .pagination button:hover {
+    background-color: #e9ecef;
+  }
+  
+  .pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  

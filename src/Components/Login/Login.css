@@ -1,30 +1,25 @@
-.background-img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1; 
-}
 
-.login-page{
+/* Login Page Container */
+.login-page {
+    margin-top: 50px;
     height: 100vh;
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    z-index: 1;
+    background-color: whitesmoke;
 }
-.login-div{
-    height: 50%;
-    width: 25%;
-    background-color: rgb(255, 255, 255);
-    box-shadow: 2px 2px 20px black;
-    border-radius: 5px;
+
+/* Login Container */
+.login-div {
+    height: auto;
+    width: 90%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.8); /* Glass-like background color with transparency */
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
     font-family: 'Roboto Slab', serif;
-    font-size: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -32,102 +27,140 @@
     position: relative;
     z-index: 2;
 }
-.login-div form{
-    background-color: rgb(206, 249, 255);
-    height: 60%;
-    width: 85%;
+
+/* Login Form */
+.login-div form {
+    width: 90%; /* Adjusted form width */
+    max-width: 350px; /* Max width for responsiveness */
+    padding: 20px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.8); /* Match login container background */
+}
+
+/* Input Containers */
+.username-div,
+.password-div {
+    margin: 20px 0;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    border-radius: 8px;
 }
-.username-div,.password-div{
-    margin: 20px;
-    height: 20%;
-    width: 95%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    z-index: 3;
-}
-#username-input::placeholder,#password-input::placeholder {
-    font-size: 15px;
-}
-.username-div img,.password-div img{
-    height: 40px;
-    width: 40px;
-}
-.login-inputs{
-    width: 60%;
-    height: 60%;
-    padding-left: 3%;
+
+/* Inputs */
+.login-inputs {
+    width: 100%;
+    padding: 10px;
+    border: none;
     border-radius: 5px;
     font-family: 'Roboto Slab', serif;
     font-size: 14px;
+    background-color: #f2f2f2; /* Light gray background */
 }
-#login-btn{
-    height: 30px;
-    width: 50%;
-    border-radius: 10px;
+
+/* Image Icons */
+.username-div img,
+.password-div img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+/* Login Buttons */
+.login-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.login-buttons button {
+    padding: 10px 0; /* Adjusted padding */
+    width: 48%; /* Adjusted width to fit two buttons */
+    border: none;
+    border-radius: 8px;
     font-family: 'Roboto Slab', serif;
-    font-size: 15px;
-    background-color: #4fa3e3;
+    font-size: 16px; /* Increased font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    background-color: white; /* Default button background color */
+    color: black; /* Text color */
+}
+
+.login-buttons button:hover {
+    background-color: #339ef0; /* Darker shade on hover */
+    transform: translateY(-2px);
+}
+
+.login-buttons button.selected {
+    background-color: #339ef0; /* Selected button background color (Facebook blue) */
+    color: black; /* Selected button text color */
+}
+
+.login-buttons button.selected:hover {
+    background-color: #146cdf; /* Darker shade on hover */
+}
+
+#login-btn{
+    margin: 20px 0; /* Added margin for spacing */
+    padding: 10px 0; /* Adjusted padding */
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Roboto Slab', serif;
+    font-size: 16px; /* Increased font size */
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#login-btn {
+    background-color: #1877f2;
     color: white;
 }
-#login-btn:hover{
-    cursor: pointer;
-    font-size: 18px;
-    background-color: #339ef0;
+
+#login-btn:hover {
+    background-color: #146cdf;
 }
-.register-text{
-    font-size: 15px;
-}
-#registerhere-text{
-    color: #339ef0;
-    font-weight: bold;
-}
-#registerhere-text:hover{
-    color: #048df6;
-    cursor: pointer;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-}
-.register-option-btn{
+/* Register Option Buttons */
+.register-option-btn {
+    background-color: #9AC8CD;
+    margin-top: 20px; /* Added margin for spacing */
+    margin-right: 10px; /* Added margin between buttons */
+    padding: 5px 10px; /* Adjusted padding */
+    border: none;
     border-radius: 6px;
-    background-color: rgb(204, 244, 249);
-    margin-left: 6px;
-    margin-right: 6px;
-    margin-top: 8px;
-    padding: 3px;
-}
-.register-option-btn:hover{
+    font-family: 'Roboto Slab', serif;
+    font-size: 14px;
+    background-color: 146cdf; /* Light blue background */
+    color: #333; /* Dark gray text */
     cursor: pointer;
-    box-shadow: 2px 2px 8px rgb(145, 143, 143);
-    background-color: rgb(117, 198, 255);
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
-.forgot-password:hover{
+
+
+.register-option-btn:hover {
+    background-color: lightblue; /* Light blue background on hover */
+}
+.forgot-password {
+    color: darkcyan;
+    cursor: pointer; /* Add cursor pointer for better UX */
+  }  
+
+.forgot-password span {
+    color: blue;
     cursor: pointer;
-    text-shadow: 2px 2px 8px rgb(145, 143, 143);
-}
-@media (max-width: 1050px) {
-    .login-div {
-        width: 60%;
-    }
-}
-@media (max-height: 1400px) and (max-width: 1200px) {
-    .login-div {
-        height: 40%;
-    }
-}
-@media (max-width: 500px) {
-    .login-div{
-        height: 50%;
-        width: 85%;
-    }
   }
-@media (max-height: 650px) {
-    .login-div{
-        height: 70%;
-    }
-}
+  
+  .forgot-password span:hover {
+    text-decoration: underline;
+  }
+  
+  .login-img img {
+    max-width: 50%; /* Ensure the image doesn't exceed its container's width */
+  }
+  .login-img {
+    width: 120%;
+    height: 120%;
+    border-radius: 30px;
+    margin-top: -30px;
+    margin-bottom: -30px;
+    margin-left: 220px;
+  }

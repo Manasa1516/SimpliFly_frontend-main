@@ -1,11 +1,30 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400&display=swap');
-
-#background-img{
-    width: 100vw;
-    height: 65vh;
-    display: flex;
+.admin-home-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 50px;
+    justify-content: center;
     align-items: center;
+    height: 80vh;
+    padding: 0 20px;
+    background-image: url('./Images/flightOwnerbackground.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.5;
+    margin-top: 50px;
+  }
+  
+  .background-img {
+    opacity: 0.8;
+  }
+  .text {
+    margin-top: -400px;
+    position: absolute;
+    margin-left: 8%;
+    font-size: 15em;
+    text-align: center;
+    color: gold;
+    opacity: 3;
 }
 .sky-img{
     height: 100%;

@@ -22,7 +22,7 @@ import RegisterUser from "./Components/RegisterUser/RegisterUser";
 import RegisteredSuccessfully from "./Components/RegisteredSuccessfullyMsg/RegisteredSuccessfully";
 import RegisterAdmin from "./Components/RegisterAdmin/RegisterAdmin";
 import UserAccount from "./Components/UserAccount/UserAccount";
-import CustomerBooking from "./Components/CustomerBookings/CustomerBooking";
+import CustomerBookingHistory from "./Components/CustomerBookings/CustomerBookingHistory";
 import ManageBooking from "./Components/ManageBookings/ManageBooking";
 import UpdatePassword from "./Components/UpdatePassword/UpdatePassword";
 
@@ -40,6 +40,7 @@ function App() {
           <Route path="registerUser" element={<RegisterUser/>}/>
           <Route path="registerAdmin" element={<RegisterAdmin/>}/>
           <Route path="register" element={<RegisterFlightOwner />} />
+          <Route path="registeredSuccessfully" element={<RegisteredSuccessfully />} />
           <Route path="navMenu" element={<NavMenu />} />
           <Route path="searchFlightResult" element={<SearchedFlightResult />} />
           <Route path="user/" element={<PrivateRoute/>}>

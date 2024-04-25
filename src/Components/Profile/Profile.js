@@ -172,8 +172,8 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
             <div className="profile-content">
               <form className="update-form">
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Name
+                  <label htmlFor="name" className="form-label custom-label">
+                    Name :
                   </label>
                   <input
                     type="text"
@@ -185,8 +185,8 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="email" className="form-label">
-                    Email
+                  <label htmlFor="email" className="form-label custom-label">
+                    Email :
                   </label>
                   <input
                     type="email"
@@ -198,8 +198,8 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="phone" className="form-label">
-                    Phone
+                  <label htmlFor="phone" className="form-label custom-label">
+                    Phone :
                   </label>
                   <input
                     type="number"
@@ -211,8 +211,8 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
                   />
                 </div>
                 {isFlightOwner && <div className="mb-3">
-                  <label htmlFor="company" className="form-label">
-                    Company
+                  <label htmlFor="company" className="form-label custom-label">
+                    Company :
                   </label>
                   <input
                     type="text"
@@ -224,8 +224,8 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
                   />
                 </div>}
                 {isFlightOwner && <div className="mb-3">
-                  <label htmlFor="address" className="form-label">
-                    Address
+                  <label htmlFor="address" className="form-label custom-label">
+                    Address :
                   </label>
                   <input
                     type="text"
@@ -237,8 +237,8 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
                   />
                 </div>}
                 {isAdmin && <div className="mb-3">
-                  <label htmlFor="designation" className="form-label">
-                    Designation
+                  <label htmlFor="designation" className="form-label custom-label">
+                    Designation :
                   </label>
                   <input
                     type="text"

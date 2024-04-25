@@ -31,3 +31,19 @@
 }
 
 }
+.account-sidebar{
+    background-color: #c9c8c9;
+}
+.container-body{
+    background-color: whitesmoke;
+}
+.sidebar-option{
+    background-color: #9e9f9e;
+    
+}
+.sidebar-option:hover{
+    background-color: white;
+    color: inherit; /* Use the same color as the default text color */
+    cursor: pointer; /* Change cursor to pointer on hover */
+  }
+  

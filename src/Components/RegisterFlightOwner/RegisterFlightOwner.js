@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./RegisterFlightOwner.css";
-import background from '../../Assets/Images/plane.jpg'
 import userimg from '../../Assets/Images/user.png'
 import keyimg from '../../Assets/Images/key.png'
 import RegisteredSuccessfully from "../RegisteredSuccessfullyMsg/RegisteredSuccessfully";
+import Registeruserimg from "./Images/image.png";
+
 
 export default function RegisterFlightOwner() {
 
@@ -75,10 +76,9 @@ export default function RegisterFlightOwner() {
   return (
     <div>
       <div className="register-page">
-        <img src={background} className="background-img" />
         <div className="register-div">
           <h3>Register as Flight Owner</h3>
-          <form>
+          <img src={Registeruserimg} className="register-image"/>
             {displayUsernamePasswordDiv && <div className="username-password-div" id="username-password-div">
             <div className="username-div">
                 <img src={userimg}/>
@@ -96,40 +96,39 @@ export default function RegisterFlightOwner() {
             </div>}
             {displayOtherDetailsDiv && <div className="other-details-div" id="other-details-div">
             <div className="name-div">
-                <label htmlFor="name">Name : </label>
+                <label htmlFor="name"style={{ fontSize: '16px', fontWeight: 'bold'  }}>Name:</label>
                 <input type="text" id="name-input" placeholder="Enter your name" className="register-inputs"
                 value={name} onChange={(e)=>setName(e.target.value)} required/>
             </div>
             <div className="email-div">
-                <label htmlFor="email">Email : </label>
+                <label htmlFor="email"style={{ fontSize: '16px', fontWeight: 'bold'  }}>Email:</label>
                 <input type="text" id="email-input" placeholder="Enter your email" className="register-inputs"
                 value={email} onChange={(e)=>setEmail(e.target.value)} required/>
             </div>
-            <div className="company-div">
-                <label htmlFor="company">Company : </label>
+            <div className="company-div"style={{ fontSize: '16px', fontWeight: 'bold'  }}>
+                <label htmlFor="company">Company:</label>
                 <input type="text" id="company-input" placeholder="Enter your company" className="register-inputs"
                 value={companyName} onChange={(e)=>setCompanyName(e.target.value)}/>
             </div>
-            <div className="contact-div">
-                <label htmlFor="contact">Contact : </label>
+            <div className="contact-div"style={{ fontSize: '16px', fontWeight: 'bold'  }}>
+                <label htmlFor="contact">Contact:</label>
                 <input type='tel' id="contact-input" placeholder="Enter your contact" className="register-inputs"
                 value={contactNumber} onChange={(e)=>setContactNumber(e.target.value)} required/>
             </div>
-            <div className="address-div">
-                <label htmlFor="address">Address : </label>
+            <div className="address-div"style={{ fontSize: '16px', fontWeight: 'bold'  }}>
+                <label htmlFor="address">Address:</label>
                 <input type='text' id="address-input" placeholder="Enter your address" className="register-inputs"
                 value={address} onChange={(e)=>setAddress(e.target.value)}/>
             </div>
             <div className="registration-number-div">
-                <label htmlFor="registration-number">Business No : </label>
-                <input type='text' id="registration-number-input" placeholder="Enter your business-registration-number" className="register-inputs" value={businessRegistration} onChange={(e)=>setBusinessRegistration(e.target.value)} required/>
+                <label htmlFor="registration-number"style={{ fontSize: '16px', fontWeight: 'bold'  }}>BusinessNumber:</label>
+                <input type='text' id="registration-number-input" placeholder="Enter your business-registration-number" className="register-inputs" value={businessRegistration} onChange={(e)=>setBusinessRegistration(e.target.value)}  required/>
             </div>
             <div className="btns">
             <button className="back-btn" onClick={DisplayUsernamePassword}>Back</button>
             <button value="Register" id="register-btn" onClick={Register}>Register</button>
             </div>
             </div>}
-        </form>
         </div>
       {registerMessage && <RegisteredSuccessfully className="register-successfully-div"/>}
       </div>

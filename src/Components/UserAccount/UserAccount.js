@@ -5,6 +5,8 @@ import CustomerBooking from "../CustomerBookings/CustomerBooking";
 import rightArrow from '../../Assets/Images/right-arrow.png'
 import leftArrow from '../../Assets/Images/left-arrow.png'
 import CustomerBookingHistory from "../CustomerBookings/CustomerBookingHistory";
+import Footer from "../Footer/Footer";
+
 
 export default function UserAccount() {
   var [profile, setProfile] = useState(true);
@@ -36,7 +38,7 @@ export default function UserAccount() {
           <div className="sidebar-container">
           <div className="more-profile-option"><img src={leftArrow} className="right-arrow" onClick={DisplayMain}/></div>
             <div
-              className="sidebar-option"
+              className="sidebar-option custom-sidebar-option"
               onClick={() => {
                 setProfile(true);
                 setBookings(false);
@@ -79,6 +81,7 @@ export default function UserAccount() {
           {bookingsHistory && <div className="get-bookings-history"><CustomerBookingHistory/></div>}
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

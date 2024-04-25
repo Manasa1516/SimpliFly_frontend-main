@@ -31,7 +31,6 @@ export default function AboutPage() {
       </div>  
       <div className='thank-you'>Thank You :)</div>
       </div>
-      <Footer/>
     </div>
   )
 }

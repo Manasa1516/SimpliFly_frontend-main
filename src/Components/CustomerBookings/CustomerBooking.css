@@ -2,6 +2,7 @@
     width: 80%;
 }
 .booking-list-div{
+    background-color: white;
     width: 80%;
     box-shadow: 2px 2px 8px rgb(127, 122, 122);
     border-radius: 8px;
@@ -20,11 +21,12 @@ width: 100%;
     justify-content: center;
 }
 .booking-passenger-details{
-    padding: 5px;
+    margin-bottom: 0;
+    padding: 6px;
     border-radius: 6px;
     display: flex;
     justify-content: space-between;
-    background-color: rgb(149, 149, 248);
+    background-color: #eceff0;
 }
 .date-seat-div{
     display: flex;
@@ -43,3 +45,24 @@ width: 100%;
         flex-direction: column;
         }
 }
+.delete-user-btn{
+    background-color: red;
+    margin-left: -30px;
+}
+.download-ticket-button {
+    background-color: #f6de63; /* Blue background color */
+    color: black; /* White text color */
+    padding: 10px 20px; /* Padding around the text */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Show pointer cursor on hover */
+    font-size: 13px; /* Font size */
+    margin-left: 10px;
+    height: 10%;
+  }
+  
+  .download-ticket-button:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+}
+
+  

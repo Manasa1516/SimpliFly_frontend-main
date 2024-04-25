@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import background from '../../Assets/Images/plane.jpg'
 import userimg from '../../Assets/Images/user.png'
 import keyimg from '../../Assets/Images/key.png'
 import RegisteredSuccessfully from "../RegisteredSuccessfullyMsg/RegisteredSuccessfully";
+import Registeruserimg from "./Images/image.png";
+
 
 export default function RegisterAdmin() {
     const [displayUsernamePasswordDiv, setDisplayUsernamePassword] = useState(true);
@@ -72,10 +73,9 @@ var Register=(e)=>{
   return (
     <div>
       <div className="register-page">
-        <img src={background} className="background-img" />
         <div className="register-div">
           <h3>Register as Admin</h3>
-          <form>
+          <img src={Registeruserimg} className="register-image"/>
             {displayUsernamePasswordDiv && <div className="username-password-div" id="username-password-div">
             <div className="username-div">
                 <img src={userimg}/>
@@ -93,27 +93,27 @@ var Register=(e)=>{
             </div>}
             {displayOtherDetailsDiv && <div className="other-details-div" id="other-details-div">
             <div className="name-div">
-                <label htmlFor="name">Name : </label>
+                <label htmlFor="name">Name: </label>
                 <input type="text" id="name-input" placeholder="Enter your name" className="register-inputs"
                 value={name} onChange={(e)=>setName(e.target.value)} required/>
             </div>
             <div className="email-div">
-                <label htmlFor="email">Email : </label>
+                <label htmlFor="email">Email: </label>
                 <input type="text" id="email-input" placeholder="Enter your email" className="register-inputs"
                 value={email} onChange={(e)=>setEmail(e.target.value)} required/>
             </div>
             <div className="contact-div">
-                <label htmlFor="contact">Contact : </label>
+                <label htmlFor="contact">Contact: </label>
                 <input type='tel' id="contact-input" placeholder="Enter your contact" className="register-inputs"
                 value={phone} onChange={(e)=>setPhone(e.target.value)} required/>
             </div>
             <div className="position-div">
-                <label htmlFor="position">Position : </label>
+                <label htmlFor="position">Position: </label>
                 <input type="text" id="email-input" placeholder="Enter your position" className="register-inputs"
                 value={position} onChange={(e)=>setPosition(e.target.value)} required/>
             </div>
             <div className="address-div">
-                <label htmlFor="position">Address : </label>
+                <label htmlFor="position">Address: </label>
                 <input type="text" id="address-input" placeholder="Enter your address" className="register-inputs"
                 value={address} onChange={(e)=>setAddress(e.target.value)} required/>
             </div>
@@ -122,7 +122,6 @@ var Register=(e)=>{
             <button value="Register" id="register-btn" onClick={Register}>Register</button>
             </div>
             </div>}
-        </form>
         </div>
       {registerMessage && <RegisteredSuccessfully className="register-successfully-div"/>}
       </div>

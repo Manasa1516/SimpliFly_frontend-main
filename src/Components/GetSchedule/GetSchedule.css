@@ -1,11 +1,9 @@
 .schedule-div{
-    margin-top: 5%;
+    margin-top: -5%;
     padding: 10px;
     height: 100%;
     width: 100%;
-    box-shadow: 2px 2px 14px rgb(216, 205, 205);
     border-radius: 5px;
-    background-color: #c2e0f5;
 }
 .get-schedule-btn{
     width: 30%;
@@ -29,7 +27,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #89ccfb;
+    background-color: #b7b7b6;
     border-radius: 5px;
     padding-left: 10px;
     padding-right: 10px;

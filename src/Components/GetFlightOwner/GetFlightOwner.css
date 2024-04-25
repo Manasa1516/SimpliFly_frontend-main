@@ -10,7 +10,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 2px 2px 14px rgb(216, 205, 205);
 }
 
 .get-allflightOwner-btn{

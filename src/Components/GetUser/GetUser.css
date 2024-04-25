@@ -5,8 +5,7 @@
     justify-content: center;
 }
 .get-user-div{
-    width: 80%;
-    box-shadow: 2px 2px 14px rgb(216, 205, 205);
+    width: 70%;
     display: flex;
     flex-direction: column;
 }
@@ -50,3 +49,26 @@ margin: 5px;
     cursor: pointer;
     box-shadow: 2px 2px 8px rgb(71, 70, 70);
 }
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-right: 100px;
+  }
+  
+  .pagination button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: gold;
+    border: 1px solid #dee2e6;
+    cursor: pointer;
+  }
+  
+  .pagination button:hover {
+    background-color: goldenrod;
+  }
+  
+  .pagination button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }

@@ -43,6 +43,7 @@ function CustomNavbar() {
                         />
                         <span className="brand-text smaller"style={{ fontWeight: 'bold', color: 'white' }}>SIMPLYFLY</span>
                     </a>
+                    <div style={{ marginRight: '-150px' }}>
                     <ul className="navbar-nav nav-links">
                         <li className="nav-item">
                             <a className="nav-link home-btn" onClick={Home}>Home</a>
@@ -60,6 +61,7 @@ function CustomNavbar() {
                             <a className="nav-link logout-btn" onClick={Logout}>Logout</a>
                         </li>)}
                     </ul>
+                    </div>
                     <button className="navbar-toggler link-btn" type="button" onClick={() => navigate('/navMenu')} id="menu-btn" style={{ color: 'white' }}>
                         <span className="navbar-toggler-icon"></span>
                     </button>

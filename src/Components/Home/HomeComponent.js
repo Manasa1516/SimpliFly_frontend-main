@@ -1,7 +1,5 @@
 import React from "react";
 import "./HomeComponent.css";
-import plane from "../../Assets/Images/plane.png";
-import PopularDestination from "../PopularDestination/PopularDestination";
 import { useState } from "react";
 import Footer from "../Footer/Footer";
 import Navbar from "../Navbar/Navbar";
@@ -10,6 +8,8 @@ import { addSearchFlight } from "../../SearchFlightSlice";
 import { addSearchFlightResult} from '../../SearchFlightResultSlice'
 import { useDispatch } from "react-redux";
 import SearchedFlightResult from "../SearchedFlightResult/SearchedFlightResult";
+import Services from "../Offers/Services";
+import AboutPage from "../AboutPage/AboutPage";
 
 export default function HomeComponent() {
   const [isRoundtrip, setIsRoundtrip] = useState(false);
@@ -108,92 +108,115 @@ export default function HomeComponent() {
   return (
     <div>
       <div className="home-main">
-        <div className="home-left">
-          <a className="navbar-brand" href="#">
-            
-          </a>
-        </div>
         <div className="flight-search-container">
           <div className="booking-form-container">
-            <form>
-              <div className="source-destination-div">
-                <div className="departure-div">
-                  <label htmlFor="departure">Flying from</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    value={Origin}
-                    onChange={(e)=>setOrigin(e.target.value)}
-                    placeholder="City or airport"
-                    id="departure"
-                    list="itemList"
-                    required
-                  />
-                  <datalist id="itemList">
-                    {airports.map((airport)=>(
-                      <option key={airport.id} value={airport.city}>
-                      {airport.city}
-                    </option>
-                    ))}
-                  </datalist>
-                </div>
-                <div className="arrival-div">
-                  <label htmlFor="arrival">Flying to</label>
-                  <input
-                    className="form-control"
-                    type="text"
-                    value={Destination}
-                    onChange={(e)=>setDestination(e.target.value)}
-                    placeholder="City or airport"
-                    id="arrival"
-                    list="itemList"
-                    required
-                  />
-                  <datalist id="itemList">
-                    {airports.map((airport)=>(
-                      <option key={airport.id} value={airport.city}>
-                      {airport.city}
-                    </option>
-                    ))}
-                  </datalist>
-                </div>
-              </div>
-              <div className="depart-date-div">
-                <span className="departing-txt">Departure</span>
-                <input className="form-control date-select" type="date" value={dateOfJourney} 
-                onChange={(e)=>setDateOfJourney(e.target.value)} required min={currentDateTime}/>
-              </div>
-              {isRoundtrip && (
-        <div className="return-date-div">
-          <span className="departing-txt">Return </span>
-          <input className="form-control date-select" type="date" required />
-        </div>
-      )}
-              <div className="passenger-count-div">
-                <div className='adult-div'>
-                <span className="adult-passenger">Adult (18+)</span>
-                  <input type="number" id="adultpassengerCount" value={Adult} name="passengerCount"  min="1" max="5" onChange={(e)=>setAdult(e.target.value)}/>
-                </div>
-                <div className='child-div'>
-                <span className="child-passenger">Child(0-17)</span>
-                  <input type="number" id="childpassengerCount" value={Child} name="passengerCount" min="0" max="5" onChange={(e) => setChild(e.target.value)} />
-                </div>
-              </div>
-              <select className="seatClass" value={SeatClass} onChange={handleSeatClassChange}> 
-                  <option value='economy'>Economy</option>
-                  <option value='premiumEconomy'>Premium Economy</option>
-                  <option value='businessClass'>Business Class</option>
-                </select>
-              <div className="form-btn">
-                <button className="submit-btn show-flight-btn" type="submit" onClick={searchFlight}>
-                  Show flights
-                </button>
-              </div>
-            </form>
-          </div>
+            <div className="Search-flights-text">
+              <h2>Search Flights</h2>
+              <h2> </h2>
+            </div>
+  <div className="source-destination-div">
+    <div className="departure-div">
+      <label htmlFor="departure">Flying from</label>
+      <input
+        className="form-control"
+        type="text"
+        value={Origin}
+        onChange={(e)=>setOrigin(e.target.value)}
+        placeholder="City or airport"
+        id="departure"
+        list="itemList"
+        required
+        style={{ fontWeight: "bold" }}
+      />
+      <datalist id="itemList">
+        {airports.map((airport)=>(
+          <option key={airport.id} value={airport.city}>
+            {airport.city}
+          </option>
+        ))}
+      </datalist>
+    </div>
+    <div className="arrival-div">
+      <label htmlFor="arrival">Flying to</label>
+      <input
+        className="form-control"
+        type="text"
+        value={Destination}
+        onChange={(e)=>setDestination(e.target.value)}
+        placeholder="City or airport"
+        id="arrival"
+        list="itemList"
+        required
+        style={{ fontWeight: "bold" }}
+      />
+      <datalist id="itemList">
+        {airports.map((airport)=>(
+          <option key={airport.id} value={airport.city}>
+            {airport.city}
+          </option>
+        ))}
+      </datalist>
+    </div>
+    <div className="depart-date-div">
+      <label htmlFor="dateOfJourney">Departure Date</label>
+      <input
+        className="form-control"
+        type="date"
+        value={dateOfJourney}
+        onChange={(e)=>setDateOfJourney(e.target.value)}
+        id="dateOfJourney"
+        min={currentDateTime}
+        required
+        style={{ fontWeight: "bold" }}
+      />
+    </div>
+    <div className="passenger-count-div-adult">
+      <label htmlFor="adultpassengerCount">Adult(18+)</label>
+      <input
+        type="number"
+        className="form-control"
+        id="adultpassengerCount"
+        value={Adult}
+        name="passengerCount"
+        min="1"
+        max="5"
+        onChange={(e)=>setAdult(e.target.value)}
+        required
+        style={{ fontWeight: "bold" }}
+      />
+    </div>
+    <div className="passenger-count-div-child">
+    <h6 style={{ marginLeft: '10px' }}>Child</h6>
+      <input
+        type="number"
+        className="form-control"
+        id="childpassengerCount"
+        value={Child}
+        name="passengerCount"
+        min="0"
+        max="5"
+        onChange={(e)=>setChild(e.target.value)}
+        required
+        style={{ fontWeight: "bold" }}
+      />
+    </div>
+  </div>
+  <h6 style={{ marginLeft: '10px' }}>Seat Class</h6>
+  <select className="seatClass" value={SeatClass} onChange={handleSeatClassChange}> 
+    <option value='economy'>Economy</option>
+    <option value='premiumEconomy'>Premium Economy</option>
+    <option value='businessClass'>Business Class</option>
+  </select>
+  <div className="show-flights">
+    <button className="submit-btn show-flight-btn" type="submit" onClick={searchFlight}>
+      Show flights
+    </button>
+  </div>
+   </div>
         </div>
       </div>
-      <PopularDestination/>
+      <Services/>
+      <AboutPage/>
       <Footer/>
     </div>
   );

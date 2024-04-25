@@ -6,6 +6,7 @@
     display: flex;
 }
 .sidebar{
+    background-color: #c6c6c6;
     width: 25%;
     height: 100%;
     display: flex;
@@ -14,6 +15,7 @@
 
 }
 .sidebar-container{
+    background-color: #c6c6c6;
     margin-top: 30%;
     height: 70%;
     width: 90%;
@@ -32,12 +34,12 @@
     font-size: 18px;
     font-weight: bold;
     font-family: 'Roboto Slab', serif;
-    background-color: #c7e4f9;
-    box-shadow: 2px 2px 14px rgb(216, 205, 205);
+    background-color: #585858;
+
 }
 .sidebar-options:hover{
     cursor: pointer;
-    background-color:#9ad2fb;
+    background-color:#585858;
 }
 .container-main{
     margin-top: 19%;

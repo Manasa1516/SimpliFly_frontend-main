@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./UpdateFlight.css";
 import axios from "axios";
+import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
 
 export default function UpdateFlight() {
   const [updateAirline,setUpdateAirline]=useState(true)
@@ -160,12 +161,12 @@ export default function UpdateFlight() {
           {updateAirline && <div className="update-airline">
                 <form>
                     <div className="flightnumber-input-div">
-                        <label htmlFor="flight-number" ><b>Flight Number :</b> </label>
+                        <label htmlFor="flight-number" style={{ marginLeft: '150px' }} ><b>Flight Number :</b> </label>
                         <select
             className="select-destination-airport"
             onChange={handleFlightNumberChange}
           >
-            <option value="0">--Select flight--</option>
+            <option value="0"style={{ marginLeft: '50px' }}>--Select flight--</option>
             {flights.map((flight) => (
               <option key={flight.flightNumber} value={flight.flightNumber}>
                 {flight.flightNumber}
@@ -174,8 +175,8 @@ export default function UpdateFlight() {
           </select>
                     </div>
                     <div className="airline-input-div">
-                        <label htmlFor="airline"><b>Airline :</b> </label>
-                        <input type="text" placeholder="Enter Airline" value={airline} onChange={(e)=>setAirline(e.target.value)}/>
+                        <label htmlFor="airline"style={{ marginLeft: '150px' }}><b>Airline :</b> </label>
+                        <input type="text" placeholder="Enter Airline" value={airline} onChange={(e)=>setAirline(e.target.value)}style={{ marginLeft: '-50px' }}/>
                     </div>
                     <button type='button' className='update-flight-btn' onClick={UpdateFlightAirline}>Update Flight</button>
                 </form>
@@ -183,12 +184,12 @@ export default function UpdateFlight() {
             {updateSeats && <div className="update-seats">
                 <form>
                     <div className="flightnumber-input-div">
-                        <label htmlFor="flight-number"><b>Flight Number :</b> </label>
+                        <label htmlFor="flight-number"style={{ marginLeft: '150px' }}><b>Flight Number :</b> </label>
                         <select
             className="select-destination-airport"
             onChange={handleFlightNumberChange}
           >
-            <option value="0">--Select flight--</option>
+            <option value="0"style={{ marginLeft: '50px' }}>--Select flight--</option>
             {flights.map((flight) => (
               <option key={flight.flightNumber} value={flight.flightNumber}>
                 {flight.flightNumber}
@@ -197,7 +198,7 @@ export default function UpdateFlight() {
           </select>
                     </div>
                     <div className="seats-input-div">
-                        <label htmlFor="seats"><b>Seats :</b> </label>
+                        <label htmlFor="seats"style={{ marginLeft: '150px' }}><b>Seats :</b> </label>
                         <input type="number" placeholder="Enter Seats" value={seats} onChange={(e)=>setSeats(e.target.value)}/>
                     </div>
                     <button type='button' className='update-flight-btn' onClick={UpdateFlightSeats}>Update Flight</button>
@@ -206,7 +207,7 @@ export default function UpdateFlight() {
             {updateStatus && <div className="update-status">
                 <form>
                     <div className="flightnumber-input-div">
-                        <label htmlFor="flight-number"><b>Flight Number :</b> </label>
+                        <label htmlFor="flight-number"style={{ marginLeft: '140px' }}><b>Flight Number :</b> </label>
                         <select
             className="select-destination-airport"
             onChange={handleFlightNumberChange}
@@ -220,8 +221,8 @@ export default function UpdateFlight() {
           </select>
                     </div>
                     <div className="status-input-div">
-                        <label htmlFor="status"><b>Status :</b> </label>
-                        <input type="number" placeholder="Enter Status" value={status} onChange={(e)=>setStatus(e.target.value)}/>
+                        <label htmlFor="status"style={{ marginLeft: '150px' }}><b>Status :</b> </label>
+                        <input type="number" placeholder="Enter Status" value={status} onChange={(e)=>setStatus(e.target.value)}style={{ marginLeft: '77px' }}/>
                     </div>
                     <button type='button' className='update-flight-btn' onClick={UpdateFlightStatus}>Update Flight</button>
                 </form>

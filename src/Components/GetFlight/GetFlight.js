@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import indigo from "../../Assets/Images/indigo.png";
 import airIndia from "../../Assets/Images/airindia.png";
@@ -6,31 +6,26 @@ import vistara from "../../Assets/Images/vistara.png";
 import "./GetFlight.css";
 
 export default function GetFlight() {
-  var [flights, setFlights] = useState([
-    {
-      airline: "",
-      flightNumber: "",
-      totalSeats: "",
-      basePrice: "",
-      status:"",
-    },
-  ]);
+  const [flights, setFlights] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const flightsPerPage = 5;
 
-  useState(() => {
-    const token=sessionStorage.getItem('token')
-    const httpHeader={
-      headers:{'Authorization':'Bearer '+token}
-  }
+  useEffect(() => {
+    const token = sessionStorage.getItem('token')
+    const httpHeader = {
+      headers: { 'Authorization': 'Bearer ' + token }
+    }
     axios
-      .get("http://localhost:5256/api/Flight",httpHeader)
+      .get("http://localhost:5256/api/Flight", httpHeader)
       .then(function (response) {
         setFlights(response.data);
         console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
-      })});
-      
+      });
+  }, []);
+
   const getAirlineImage = (airline) => {
     airline = airline.toLowerCase();
     switch (airline) {
@@ -45,12 +40,15 @@ export default function GetFlight() {
     }
   };
 
+  const indexOfLastFlight = currentPage * flightsPerPage;
+  const indexOfFirstFlight = indexOfLastFlight - flightsPerPage;
+  const currentFlights = flights.slice(indexOfFirstFlight, indexOfLastFlight);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
     <div className="get-flight-div">
-      <div className="get-flight-options">
-        
-      </div>
-      {flights.map((flight, index) => (
+      {currentFlights.map((flight, index) => (
         <div key={index} className="flight-list-div">
           <div className="flight-list">
             <div className="airline">
@@ -77,6 +75,14 @@ export default function GetFlight() {
           </div>
         </div>
       ))}
+      <div className="pagination">
+        {flights.length > flightsPerPage && (
+          <button onClick={() => paginate(currentPage - 1)}>Previous</button>
+        )}
+        {flights.length > indexOfLastFlight && (
+          <button onClick={() => paginate(currentPage + 1)}>Next</button>
+        )}
+      </div>
     </div>
   );
 }

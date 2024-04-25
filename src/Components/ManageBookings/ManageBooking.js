@@ -14,13 +14,31 @@ export default function ManageBooking() {
             <div className="sidebar-options booking-btn-div" onClick={()=>{
               setBooking(true);
               setCancelBooking(false);
-            }}>
+            }}style={{
+              backgroundColor: "#dddddc", // Red color
+              color: "black",
+              padding: "10px",
+              marginBottom: "5px",
+              cursor: "pointer",
+              transition: "background-color 0.3s" // Smooth transition
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = "#848484"} // Darken color on hover
+            onMouseLeave={(e) => e.target.style.backgroundColor = "#dddddc"}>
                 Get Bookings
             </div>
             <div className="sidebar-options cancel-booking-btn-div" onClick={()=>{
               setBooking(false);
               setCancelBooking(true);
-            }}>
+            }}style={{
+              backgroundColor: "#dddddc", // Red color
+              color: "black",
+              padding: "10px",
+              marginBottom: "5px",
+              cursor: "pointer",
+              transition: "background-color 0.3s" // Smooth transition
+            }}
+            onMouseEnter={(e) => e.target.style.backgroundColor = "#848484"} // Darken color on hover
+            onMouseLeave={(e) => e.target.style.backgroundColor = "#dddddc"}>
                 Cancel Bookings
             </div>
         </div>
