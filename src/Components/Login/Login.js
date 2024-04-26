@@ -10,12 +10,50 @@ export default function Login() {
   var [Username, setUsername] = useState('');
   var [Password, setPassword] = useState('');
   var [userDetails, setUserDetails] = useState([]);
+  const [usernameError, setUsernameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [formError, setFormError] = useState('');
+
+  const validateUsername = (username) => {
+    if(!username)
+    {
+      setUsernameError("Please enter username");
+      return false;
+    }
+    else if (/^[^a-zA-Z0-9]/.test(username)) {
+      setUsernameError('Username should not start with a special character.');
+      return false;
+    } else if (/^\d/.test(username)) {
+      setUsernameError('Username should not start with a digit.');
+      return false;
+    }
+     else 
+     {
+      setUsernameError('');
+      return true;
+    }
+  };
+
+  const validatePassword = (password) => {
+    if(!password)
+    {
+       setPasswordError("Please enter password");
+       return false;
+    }
+      
+      setPasswordError("");
+      return true;
+
+  };
   var user = {};
   var Login = (e) => {
-    if(!Username || !Password){
-      alert("Please enter username and password")
-      return;
-    }
+    if (validateUsername(Username) && validatePassword(Password)) {
+      setUsernameError("");
+      setPasswordError("");
+}
+else {
+ setFormError("Enter all required fields.")
+}
     e.preventDefault();
     user.Username = Username;
     user.Password = Password;
@@ -104,7 +142,10 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err);
-        alert("Invalid username or password")
+        if(validateUsername(Username) && validatePassword(Password))
+        {
+          setFormError("Invalid Credentials ");
+        }
       });
   };
 
@@ -128,6 +169,7 @@ export default function Login() {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
+            <span style={{ color: 'red' }}>{usernameError}</span>
             <div className="password-div">
               <img src={key} />
               <input
@@ -139,15 +181,16 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+            <span style={{ color: 'red' }}>{passwordError}</span>
             <input type="submit" value="Login" id="login-btn" onClick={Login} />
-            <h6 className="forgot-password" onClick={()=>navigate('/updatePassword')}>forgot password?</h6>
+            <span style={{ color: 'red' }}>{formError}</span>
+            <h6 className="forgot-password" onClick={()=>navigate('/UpdatePassword')}>forgot password?</h6>
           </form>
-          <p className="register-text">
-            Don't have account? register as-<br/>
+          <p className="register-text"style={{ color: 'blue' }}>
+            Don't have account? Register as-<br/>
             <span id="registerhere-text">
               <button className='register-option-btn' onClick={()=>navigate('/registerUser')}>Customer</button>
               <button className='register-option-btn' onClick={()=>navigate('/register')}>FlightOwner</button>
-              <button className='register-option-btn' onClick={()=>navigate('/registerAdmin')}>Admin</button>
             </span>
           </p>
         </div>

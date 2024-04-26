@@ -41,7 +41,6 @@ export default function UpdatePassword() {
   return (
     <div>
       <div className="register-page">
-        <img src={background} className="background-img" />
         <div className="register-div update-password-div">
           <h3>Update Password</h3>
           <div className="username-password-div" id="username-password-div">

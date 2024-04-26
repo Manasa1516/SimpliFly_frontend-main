@@ -18,18 +18,20 @@
   }
   
   .flight-search-container {
-    margin: 0 auto; /* Center the box horizontally */
-    width: 70%; /* Adjust the width as needed */
+    margin: 0 auto; 
+    width: 70%; 
     padding: 50px;
     background-color: white;
     border-radius: 10px;
     box-shadow: 10px 10px 10px rgba(69, 67, 67, 0.5);
     display: flex;
-    justify-content: center; /* Center items horizontally */
-    align-items: center; /* Center items vertically */
-    opacity: 1;
+    justify-content: center;
+    align-items: center; 
+    opacity: 1 !important;
     gap: 30px;
 }
+
+  
 
 .source-destination-div{
     margin-left: 10px;
@@ -223,19 +225,83 @@
   }
   @media (max-width: 768px) {
     .home-main {
-      /* Add mobile styles here */
+        height: -30%;
+        width: 100%;
     }
   
     .flight-search-container {
-      /* Add mobile styles here */
+        margin-top: 30px;
+        height: 85%;
     }
   
-    .source-destination-div {
-      /* Add mobile styles here */
-    }
-  
-    /* Add other mobile styles here */
+    
   }
+  @media (max-width: 768px) {
+    .source-destination-div,
+    .departure-div,
+    .arrival-div,
+    .depart-date-div,
+    .passenger-count-div-adult,
+    .passenger-count-div-child,
+    .show-flights {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: -5px; /* Add spacing between sections */
+      margin-left: 30px;
+    }
+    .seatClass{
+        width: -60%;
+        margin-left: -50%;
+    }
+  
+    .source-destination-div label,
+    .departure-div label,
+    .arrival-div label,
+    .depart-date-div label,
+    .passenger-count-div-adult label,
+    .passenger-count-div-child label
+     {
+      margin-right: 0;
+      margin-left: 40%;
+      margin-bottom: -15px;
+      text-align: center;
+      font-size: 18px;
+    }
+    .Search-flights-text{
+        margin-bottom: 3%;
+        margin-left: 38%;
+    }
+    .seatClass{
+        margin-left: 35% !important;
+    }
+    .source-destination-div input,
+    .departure-div input,
+    .arrival-div input,
+    .depart-date-div input,
+    .passenger-count-div-adult input,
+    .passenger-count-div-child input
+     {
+      width: 40%;
+      margin-bottom: 10px;
+      margin: 10px 150px;
+
+    }
+  
+    .show-flights button {
+      width: 30%;
+      margin: 10px 170px;
+    }
+  }
+
+  
+
+  
+  
+
+  
+  
+  
+  
  
   
 
