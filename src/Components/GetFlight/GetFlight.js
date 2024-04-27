@@ -9,6 +9,8 @@ export default function GetFlight() {
   const [flights, setFlights] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const flightsPerPage = 5;
+  const flightOwnerId = sessionStorage.getItem("ownerId");
+
 
   useEffect(() => {
     const token = sessionStorage.getItem('token')
@@ -16,7 +18,7 @@ export default function GetFlight() {
       headers: { 'Authorization': 'Bearer ' + token }
     }
     axios
-      .get("http://localhost:5256/api/Flight", httpHeader)
+      .get(`http://localhost:5256/api/Flight/GetAllFlights/flightOwnerId?flightOwnerId=${flightOwnerId}`, httpHeader)
       .then(function (response) {
         setFlights(response.data);
         console.log(response.data);

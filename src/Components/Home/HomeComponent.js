@@ -34,7 +34,17 @@ export default function HomeComponent() {
   };
 
   var searchFlight = (e) => {
-    if (Adult > 5 || Child > 5 ||(Adult+Child)>5) {
+    if (!Origin || !Destination || !dateOfJourney) {
+      setErrorOrigin(!Origin ? "Please fill in this field" : "");
+      setErrorDestination(!Destination ? "Please fill in this field" : "");
+      setErrorDate(!dateOfJourney ? "Please fill in this field" : "");
+      return;
+    } else {
+      setErrorOrigin("");
+      setErrorDestination("");
+      setErrorDate("");
+    }
+    if (Adult > 5 || Child > 5 ) {
       setErrorPassengers("Enter adult and child value less than 5");
       return;
     } else {
@@ -49,17 +59,6 @@ export default function HomeComponent() {
       return;
     }
     else{
-      setErrorDate("");
-    }
-
-    if (!Origin || !Destination || !dateOfJourney) {
-      setErrorOrigin(!Origin ? "Please fill in this field" : "");
-      setErrorDestination(!Destination ? "Please fill in this field" : "");
-      setErrorDate(!dateOfJourney ? "Please fill in this field" : "");
-      return;
-    } else {
-      setErrorOrigin("");
-      setErrorDestination("");
       setErrorDate("");
     }
 

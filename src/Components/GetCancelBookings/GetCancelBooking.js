@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import "./GetBookings.css";
+import "./GetCancelBooking.css";
 import axios from "axios";
 import indigo from "../../Assets/Images/indigo.png";
 import airIndia from "../../Assets/Images/airindia.png";
 import vistara from "../../Assets/Images/vistara.png";
 
-export default function GetBookings() {
+export default function GetCancelBookings() {
   var [bookings, setBooking] = useState([]);
-  var ownerId = sessionStorage.getItem("ownerId");
+  var userId = sessionStorage.getItem("ownerId");
   const token = sessionStorage.getItem("token");
   const [currentPage, setCurrentPage] = useState(1);
   const bookingsPerPage = 4;
@@ -18,10 +18,10 @@ export default function GetBookings() {
     };
     axios
       .get(
-        "http://localhost:5256/api/admin/dashboard/Bookings/Allbookings",
+        `http://localhost:5256/api/users/GetAllCancelledBookings`,
         httpHeader
       )
-      .then(function (response) {        
+      .then(function (response) {
         const sortBookings = response.data.sort((a, b) => new Date(b.bookingTime) - new Date(a.bookingTime));
         setBooking(sortBookings);
         console.log(response.data);
@@ -39,7 +39,7 @@ export default function GetBookings() {
     };
     axios
       .get(
-        "http://localhost:5256/api/admin/dashboard/Users/AllCustomers",
+        `http://localhost:5256/api/admin/dashboard/Users/AllCustomers`,
         httpHeader
       )
       .then(function (response) {
@@ -76,20 +76,6 @@ export default function GetBookings() {
     return hours + ":" + minutes + " hours";
   }
 
-  function CancelBooking(bookingId,userId){
-    var RequestOptions={
-      method : 'Delete',
-      headers : {'Content-Type':'Application/json',
-      'Authorization':'Bearer '+token},
-    }
-    fetch(`http://localhost:5256/api/users/${userId}/bookings/${bookingId}`,RequestOptions)
-      .then(res=>res.json)
-      .then(alert("Booking deleted successfully"))
-      .catch((err)=>{
-        alert(err)
-      })
-  }
-
   const getAirlineImage = (airline) => {
     airline = airline.toLowerCase();
     switch (airline) {
@@ -104,6 +90,40 @@ export default function GetBookings() {
     }
   };
 
+  const handleRefundStatusUpdate = (bookingId, newStatus) => {
+    const httpHeader = {
+      headers: { Authorization: "Bearer " + token },
+    };
+    axios
+      .put(
+        `http://localhost:5256/api/Bookings/UpdateRefundStatus`,
+        { id: bookingId, refundStatus: newStatus },
+        httpHeader
+      )
+      .then(function (response) {
+        console.log(response.data);
+        alert("Refund status update successful");
+        // Refresh the bookings list
+        axios
+          .get(
+            `http://localhost:5256/api/users/GetAllCancelledBookings`,
+            httpHeader
+          )
+          .then(function (response) {
+            const sortBookings = response.data.sort((a, b) => new Date(b.bookingTime) - new Date(a.bookingTime));
+            setBooking(sortBookings);
+            console.log(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      })
+      .catch(function (error) {
+        console.error("Error:", error);
+        alert("Error updating refund status.");
+      });
+  };
+
   const indexOfLastBooking = currentPage * bookingsPerPage;
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
   const currentBookings = bookings.slice(indexOfFirstBooking, indexOfLastBooking);
@@ -113,58 +133,67 @@ export default function GetBookings() {
   return (
     <div className="bookings-div">
       <div className="get-bookings-div">
-        {currentBookings.filter(cb => cb.schedule.flight.flightOwnerOwnerId == ownerId).map((booking, index) => (
-          <div key={index} className="booking-list-div">
+        {currentBookings.map((booking, index) => (
+          <div key={index} className="booking-list-div1">
             <div className="booking-schedule-details">
               <div className="booking-flight-detail">
                 <img
-                  src={getAirlineImage(booking.schedule.flight.airline)}
+                  src={getAirlineImage(booking.booking.schedule.flight.airline)}
                   className="airline-logo"
                 />
                 <div>
                   <p className="-bookingflight-details">
-                    {booking.schedule.flight.airline}
+                    {booking.booking.schedule.flight.airline}
                   </p>
                   <p className="booking-flight-details">
-                    {booking.schedule.flightId}
+                    {booking.booking.schedule.flightNumber}
                   </p>
                 </div>
               </div>
               <div className="flight-source">
                 <p className="flight-details">
-                  {booking.schedule.route.sourceAirport.city}
+                  {booking.booking.schedule.route.sourceAirport.city}
                 </p>
                 <p className="flight-details">
-                  {getDate(new Date(booking.schedule.departure)).formattedTime}
+                  {getDate(new Date(booking.booking.schedule.departure)).formattedTime}
                 </p>
               </div>
               <p className="time-diff">
                 {getTimeDifference(
-                  booking.schedule.departure,
-                  booking.schedule.arrival
+                  booking.booking.schedule.departure,
+                  booking.booking.schedule.arrival
                 )}
               </p>
               <div className="flight-destination">
                 <p className="flight-details">
-                  {booking.schedule.route.destinationAirport.city}
+                  {booking.booking.schedule.route.destinationAirport.city}
                 </p>
                 <p className="flight-details">
-                  {getDate(new Date(booking.schedule.arrival)).formattedTime}
+                  {getDate(new Date(booking.booking.schedule.arrival)).formattedTime}
                 </p>
               </div>
-              
-            <div className='delete-user-btn' onClick={()=>CancelBooking(booking.id,booking.userId)}>X</div>
+              <div className="refund-status-container">
+  <select
+    className="refund-status-select"
+    value={booking.refundStatus}
+    onChange={(e) => handleRefundStatusUpdate(booking.id, e.target.value)}
+  >
+    <option value="Refund Issued">Refund Issued</option>
+    <option value="Cancelled">Cancelled</option>
+  </select>
+</div>
+
             </div>
             <div className="booking-passenger-details">
               <div>
                 Booking Date :{" "}
-                <b>{getDate(new Date(booking.bookingTime)).formattedDate}</b>
+                <b>{getDate(new Date(booking.booking.bookingTime)).formattedDate}</b>
               </div>
               <div>
-                Booked By : <b>{GetUser(booking.userId)}</b>
+                Booked By : <b>{GetUser(booking.booking.userId)}</b>
               </div>
               <div>
-                Booking Status : <b>{(booking.bookingStatus)}</b>
+                Refund Status : <b>{booking.refundStatus}</b>
               </div>
             </div>
           </div>

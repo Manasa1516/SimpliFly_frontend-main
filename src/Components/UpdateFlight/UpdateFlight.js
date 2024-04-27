@@ -29,13 +29,30 @@ export default function UpdateFlight() {
   var updateSeatsDetail={}
   var updateStatusDetail={}
 
+  const flightOwnerId = sessionStorage.getItem("ownerId");
+
+  const [seatError, setSeatError] = useState("");
+  const [formError, setFormError] = useState("Enter all the required fields");
+  var [isFilledAll, setIsFilledAll] = useState(false);
+
+  function validateSeat(noOfSeats) {
+    if (noOfSeats <= 0 || noOfSeats > 120) {
+      setSeatError("Total Seats can't be negative and greater than 120");
+      return false;
+    }
+    else {
+      setSeatError("");
+      return true;
+    }
+  }
+
   useEffect(() => {
     const token=sessionStorage.getItem('token')
     const httpHeader={
       headers:{'Authorization':'Bearer '+token}
   }
     axios
-      .get("http://localhost:5256/api/Flight",httpHeader)
+      .get(`http://localhost:5256/api/Flight/GetAllFlights/flightOwnerId?flightOwnerId=${flightOwnerId}`,httpHeader)
       .then(function (response) {
         setFlights(response.data);
         console.log(response.data);
@@ -80,10 +97,17 @@ export default function UpdateFlight() {
     }
 
     var UpdateFlightSeats=(e)=>{
-      if(!flightNumber || !seats){
-        alert("Please enter the required details")
-        return
+      if (!flightNumber || !seats) {
+        setIsFilledAll(true);
+        return;
       }
+      else if (!validateSeat(seats)) {
+        setSeatError("Total Seats can't be negative and greater than 120");
+        return;
+      }
+
+      setIsFilledAll(false);
+
         e.preventDefault();
         updateSeatsDetail.flightNumber=flightNumber;
         updateSeatsDetail.totalSeats=parseInt(seats);
@@ -140,11 +164,6 @@ export default function UpdateFlight() {
   return (
       <div className="update-flight-div">
         <div className="update-options-div">
-          <div className="update-airline-btn" onClick={()=>{
-            setUpdateAirline(true);
-            setUpdateSeats(false);
-            setUpdateStatus(false);
-          }}>Update Airline</div>
           <div className="update-seats-btn" onClick={()=>{
             setUpdateAirline(false);
             setUpdateSeats(true);
@@ -158,29 +177,7 @@ export default function UpdateFlight() {
           
         </div>
         <div className="update-div">
-          {updateAirline && <div className="update-airline">
-                <form>
-                    <div className="flightnumber-input-div">
-                        <label htmlFor="flight-number" style={{ marginLeft: '150px' }} ><b>Flight Number :</b> </label>
-                        <select
-            className="select-destination-airport"
-            onChange={handleFlightNumberChange}
-          >
-            <option value="0"style={{ marginLeft: '50px' }}>--Select flight--</option>
-            {flights.map((flight) => (
-              <option key={flight.flightNumber} value={flight.flightNumber}>
-                {flight.flightNumber}
-              </option>
-            ))}
-          </select>
-                    </div>
-                    <div className="airline-input-div">
-                        <label htmlFor="airline"style={{ marginLeft: '150px' }}><b>Airline :</b> </label>
-                        <input type="text" placeholder="Enter Airline" value={airline} onChange={(e)=>setAirline(e.target.value)}style={{ marginLeft: '-50px' }}/>
-                    </div>
-                    <button type='button' className='update-flight-btn' onClick={UpdateFlightAirline}>Update Flight</button>
-                </form>
-            </div>}
+          
             {updateSeats && <div className="update-seats">
                 <form>
                     <div className="flightnumber-input-div">
@@ -199,9 +196,13 @@ export default function UpdateFlight() {
                     </div>
                     <div className="seats-input-div">
                         <label htmlFor="seats"style={{ marginLeft: '150px' }}><b>Seats :</b> </label>
-                        <input type="number" placeholder="Enter Seats" value={seats} onChange={(e)=>setSeats(e.target.value)}/>
-                    </div>
+                        <input type="number" placeholder="Enter Seats" value={seats} onChange={(e) => { setSeats(e.target.value); validateSeat(e.target.value) }} />
+                        </div>
+                        <span style={{ color: 'red' }}>{seatError}</span>
+
                     <button type='button' className='update-flight-btn' onClick={UpdateFlightSeats}>Update Flight</button>
+                    {isFilledAll ? <span style={{ color: 'red' }}>{formError}</span> : ""}
+
                 </form>
             </div>}
             {updateStatus && <div className="update-status">

@@ -1,0 +1,21 @@
+download-ticket-btn {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    margin-top: 8px;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s;
+  }
+  
+  .download-ticket-btn:hover {
+    background-color: #0056b3;
+  }
+  .booking-list-div1{
+    width: 150%;
+    margin-left: -10%;
+  }

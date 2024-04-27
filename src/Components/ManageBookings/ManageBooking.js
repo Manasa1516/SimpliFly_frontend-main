@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import'./ManageBookings.css'
-import GetBookings from '../GetBookings/GetBookings'
+import GetBookings from '../GetBookings/GetBookings';
+import GetCancelBookings from '../GetCancelBookings/GetCancelBooking';
 
 export default function ManageBooking() {
     const [booking,setBooking]=useState(true)
@@ -48,6 +49,7 @@ export default function ManageBooking() {
                 <GetBookings/>
             </div>}
             {cancelBooking && <div className="cancel-bookings">
+              <GetCancelBookings/>
             </div>}
         </div>
       </div>

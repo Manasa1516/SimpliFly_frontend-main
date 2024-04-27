@@ -38,7 +38,7 @@ export default function CustomerBooking() {
     return hours + ":" + minutes + " hours";
   }
 
-  function CancelBooking(passengerBookingId) {
+  function CancelBooking(passengerId) {
     const confirmDelete = window.confirm(`Are you sure you want to cancel booking?`);
     if (confirmDelete) {
 
@@ -51,7 +51,7 @@ export default function CustomerBooking() {
         }
       }
 
-      fetch(`http://localhost:5256/api/users/CancelBookingByPassenger?passengerId=${passengerBookingId}`, RequestOption)
+      fetch(`http://localhost:5256/api/users/CancelBookingByPassenger?passengerId=${passengerId}`, RequestOption)
         .then(res => res.json())
         .then(res => {
           console.log(res);
@@ -63,7 +63,7 @@ export default function CustomerBooking() {
         });
 
     }
-    console.log(passengerBookingId);
+    console.log(passengerId);
   }
 
   const getAirlineImage = (airline) => {
@@ -163,7 +163,7 @@ export default function CustomerBooking() {
                 <p className="flight-details">{getDate(new Date(booking.booking.schedule.arrival)).formattedTime}</p>
               </div>
               <button className="download-ticket-button" onClick={() => downloadTicket(booking)}>Download Ticket</button>
-              <div className='delete-user-btn' onClick={() => CancelBooking(booking.id)}>X</div>
+              <div className='delete-user-btn' onClick={() => CancelBooking(booking.passengerId)}>X</div>
             </div>
             <div className='date-seat-div'>
               <div>Departure Date : <b>{getDate(new Date(booking.booking.schedule.departure)).formattedDate}</b></div>
