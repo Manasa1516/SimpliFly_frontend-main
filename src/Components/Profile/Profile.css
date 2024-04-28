@@ -1,11 +1,17 @@
 .update-profile-btn{
-    background-color: gray;
+    background-color: #1a77a3;
     color: white;
     font-weight: bold;
 }
+
 .profile-section{
     padding: 8px;
     border-radius: 6px;
+    
+}
+.col-md-16{
+  margin-top: -60%;
+  width: fit-content;
 }
 
 
@@ -14,6 +20,7 @@
         box-shadow: 2px 2px 8px rgb(90, 87, 87);
     }
 }
+
 .form-label {
     text-align: right;
   }

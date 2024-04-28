@@ -8,30 +8,9 @@ import vistara from "../../Assets/Images/vistara.png";
 export default function GetCancelBookings() {
   var [bookings, setBooking] = useState([]);
   var userId = sessionStorage.getItem("userId");
-  var username = sessionStorage.getItem("username");
-console.log(username);
-
   const token = sessionStorage.getItem("token");
   const [currentPage, setCurrentPage] = useState(1);
-  const [user, setUser] = useState(null);
-  const bookingsPerPage = 4;
-
-  useEffect(() => {
-    const httpHeader = {
-      headers: { Authorization: "Bearer " + token },
-    };
-    axios
-      .get(
-        `http://localhost:5256/api/users/GetCustomerByUsername?username=${username}`,
-        httpHeader
-      )
-      .then(function (response) {
-        setUser(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, [username, token]);
+  const [users, setUsers] = useState(null);
 
   useEffect(() => {
     const httpHeader = {
@@ -50,9 +29,8 @@ console.log(username);
       .catch(function (error) {
         console.log(error);
       });
-  }, []);
+  }, [token]);
 
-  var [users, setUsers] = useState();
 
   useEffect(() => {
     const httpHeader = {
@@ -73,13 +51,9 @@ console.log(username);
   }, []);
 
   function GetUser(id) {
-    if (users && users.length > 0) {
-        const User = users.find((user) => user.userId === id);
-        if (User) {
-            return User.name;
-        }
-    }
-    return "User Not Found";
+    console.log("userId " + id);
+    const user = users.find((user) => user.userId === id);
+    return user ? user.name : "User Not Found";
   }
 
   function getDate(date) {
@@ -113,17 +87,19 @@ console.log(username);
     }
   };
 
-
+  const bookingsPerPage = 4;
+  var currentBookings = bookings.filter(cb => cb.booking.userId == userId);
   const indexOfLastBooking = currentPage * bookingsPerPage;
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
-  const currentBookings = bookings.slice(indexOfFirstBooking, indexOfLastBooking);
+  const currentBookings1 = currentBookings.slice(indexOfFirstBooking, indexOfLastBooking);
+
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="bookings-div">
       <div className="get-bookings-div">
-      {currentBookings.map((booking, index)=> (
+      {currentBookings1.map((booking, index)=> (
     <div key={index} className="booking-list-div1">
         <div className="booking-schedule-details">
             <div className="booking-flight-detail">
@@ -137,14 +113,10 @@ console.log(username);
                 <p className="flight-details">{booking.booking.schedule.route.sourceAirport.city}</p>
                 <p className="flight-details">{getDate(new Date(booking.booking.schedule.departure)).formattedTime}</p>
             </div>
-            <p className="time-diff">
-                {getTimeDifference(booking.booking.schedule.departure, booking.booking.schedule.arrival)} hours
-            </p>
+            <p className="time-diff">{getTimeDifference(booking.booking.schedule.departure, booking.booking.schedule.arrival)}</p>
             <div className="flight-destination">
                 <p className="flight-details">{booking.booking.schedule.route.destinationAirport.city}</p>
                 <p className="flight-details">{getDate(new Date(booking.booking.schedule.arrival)).formattedTime}</p>
-            </div>
-            <div className="refund-status-container">
             </div>
         </div>
         <div className="booking-passenger-details">
@@ -158,16 +130,16 @@ console.log(username);
                 Refund Status : <b>{booking.refundStatus}</b>
             </div>
         </div>
-    </div>
-))}
+        </div>
+      ))}
 
-        <div className='pagination'>
-          {bookings.length > bookingsPerPage && (
-            <button onClick={() => paginate(currentPage - 1)}>Previous</button>
-          )}
-          {bookings.length > indexOfLastBooking && (
-            <button onClick={() => paginate(currentPage + 1)}>Next</button>
-          )}
+<div className='pagination'>
+            {(currentBookings.length > bookingsPerPage && currentPage > 1) && (
+                <button onClick={() => paginate(currentPage - 1)}>Previous</button>
+            )}
+            {currentBookings.length > indexOfLastBooking && (
+                <button onClick={() => paginate(currentPage + 1)}>Next</button>
+            )}
         </div>
       </div>
     </div>

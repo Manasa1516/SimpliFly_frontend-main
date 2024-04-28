@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
+import backImg from "./Images/image.png";
 
 export default function Profile() {
   var [user, setUser] = useState({});
@@ -167,7 +168,6 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
   return (
     <div>
       <div className="container profile-section">
-        <div className="row">
           <div className="col-md-6">
             <div className="profile-content">
               <form className="update-form">
@@ -259,7 +259,6 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
             </div>
           </div>
         </div>
-      </div>
     </div>
   );
 }

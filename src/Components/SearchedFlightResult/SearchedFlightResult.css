@@ -56,16 +56,19 @@
     width: 70%;
     font-size: 18px;
     font-weight: 500;
-  }
+    }
   .search-flight-btn:hover{
     background-color: rgb(173, 208, 239);
 }
 .available-flights-div{
-  box-shadow: 2px 2px 14px rgb(118, 111, 111);
   width: 65%;
   margin: 5px;
   border-radius: 6px;
   padding: 15px;
+}
+.available-flights-div :hover{
+  box-shadow: 2px 2px 14px rgb(118, 111, 111);
+  border-radius: 6px;
 }
 .key-div{
   height: 100%;

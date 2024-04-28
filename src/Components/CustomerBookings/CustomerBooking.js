@@ -11,6 +11,8 @@ import JsBarcode from 'jsbarcode';
 export default function CustomerBooking() {
   var [bookings, setBookings] = useState([]);
   var userId = sessionStorage.getItem("userId");
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   useState(() => {
     fetch(`http://localhost:5256/api/users/GetBookingByCustomerId?customerId=${userId}`)
@@ -137,6 +139,15 @@ export default function CustomerBooking() {
     
     doc.save('boarding-pass.pdf');
   };
+
+  const bookingsPerPage = 4;
+  var currentBookings = bookings.filter(cb => cb.booking.userId == userId);
+  const indexOfLastBooking = currentPage * bookingsPerPage;
+  const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
+  const currentBookings1 = currentBookings.slice(indexOfFirstBooking, indexOfLastBooking);
+
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
   
 
   return (
@@ -175,6 +186,14 @@ export default function CustomerBooking() {
               <div>Booking Date : <b>{getDate(new Date(booking.booking.bookingTime)).formattedDate}</b></div>
             </div>
           </div>))}
+          <div className='pagination'>
+            {(currentBookings.length > bookingsPerPage && currentPage > 1) && (
+                <button onClick={() => paginate(currentPage - 1)}>Previous</button>
+            )}
+            {currentBookings.length > indexOfLastBooking && (
+                <button onClick={() => paginate(currentPage + 1)}>Next</button>
+            )}
+        </div>
       </div>
     </div>
   )

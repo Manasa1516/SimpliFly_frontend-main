@@ -7,6 +7,11 @@ import leftArrow from '../../Assets/Images/left-arrow.png'
 import CustomerBookingHistory from "../CustomerBookings/CustomerBookingHistory";
 import CancelledBookings from "../GetCancellBookingCustomer/GetCancelBooking";
 import Footer from "../Footer/Footer";
+import ProfileImg from "./Images/profile.png";
+import useronline from "./Images/useronline.png";
+import mybooking from "./Images/Mybooking.png";
+import completedbooking from "./Images/bookinghistory.png";
+import cancelledbookingImg from "./Images/cancelledbooking.png";
 
 export default function UserAccount() {
   var [profile, setProfile] = useState(true);
@@ -38,6 +43,10 @@ export default function UserAccount() {
       <div className="container-body">
         <div className="sidebar account-sidebar" id="account-sidebar">
           <div className="sidebar-container">
+          <div className="dashboard-heading">
+            <img src={useronline} className="user-online" style={{ display: "block", height: "50%", width:"50%",marginBottom: "10px",marginLeft:"70px" }}/>
+          <h2 style={{ fontSize: "20px", color: "white",textAlign: "center"}}>Dashboard</h2>
+          </div>
             <div className="more-profile-option">
               <img src={leftArrow} className="right-arrow" onClick={DisplayMain} />
             </div>
@@ -49,8 +58,8 @@ export default function UserAccount() {
                 setBookingHistory(false);
                 setCancelledBookings(false); // Ensure CancelledBookings is set to false
               }}
-            >
-              Profile
+            ><div style={{ display: "flex", alignItems: "left", marginRight:"70px" }}>
+            <img src={ProfileImg} alt="Profile" style={{ width: "20px", height: "20px", marginRight: "5px",opacity:"50px" }} /> Profile</div>
             </div>
 
             {isCustomer && (
@@ -62,8 +71,8 @@ export default function UserAccount() {
                   setBookingHistory(false);
                   setCancelledBookings(false); // Ensure CancelledBookings is set to false
                 }}
-              >
-                Bookings
+              ><div style={{ display: "flex", alignItems: "left", marginRight:"40px" }}>
+              <img src={mybooking} alt="Profile" style={{ width: "20px", height: "20px", marginRight: "5px",opacity:"50px" }} /> My Bookings</div>
               </div>
             )}
             {isCustomer && (
@@ -75,8 +84,8 @@ export default function UserAccount() {
                   setBookingHistory(true);
                   setCancelledBookings(false); // Ensure CancelledBookings is set to false
                 }}
-              >
-                Bookings History
+              ><div style={{ display: "flex", alignItems: "left" }}>
+              <img src={completedbooking} alt="Profile" style={{ width: "20px", height: "20px", marginRight: "5px",opacity:"50px" }} /> Completed Booking</div>
               </div>
             )}
             {isCustomer && (
@@ -88,8 +97,8 @@ export default function UserAccount() {
                   setBookingHistory(false);
                   setCancelledBookings(true); // Set CancelledBookings to true
                 }}
-              >
-                Cancelled Bookings
+              ><div style={{ display: "flex", alignItems: "left" }}>
+              <img src={cancelledbookingImg} alt="Profile" style={{ width: "20px", height: "20px", marginRight: "5px",opacity:"50px",marginLeft:"10px" }} /> Cancelled Bookings</div>
               </div>
             )}
           </div>

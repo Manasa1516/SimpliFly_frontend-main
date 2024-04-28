@@ -230,7 +230,7 @@ export default function BookingDetails() {
           </button>
         </div>
       </div>
-      <h1>Passenger List</h1>
+      <h2>Passenger List</h2>
       <ul className="added-passenger">
         {passengers.map((passenger, index) => (
           <li key={index} className="added-passenger-list">

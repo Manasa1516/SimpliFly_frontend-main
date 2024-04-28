@@ -61,6 +61,8 @@ export default function GetCancelBookings() {
     return "User Not Found";
   }
 
+  
+
   function getDate(date) {
     const formattedDate = date.toLocaleDateString();
     const formattedTime = date.toLocaleTimeString();
@@ -135,7 +137,7 @@ export default function GetCancelBookings() {
   return (
     <div className="bookings-div">
       <div className="get-bookings-div">
-        {currentBookings.map((booking, index) => (
+        {currentBookings.filter(cb => cb.booking.schedule.flight.flightOwnerOwnerId == userId).map((booking, index) => (
           <div key={index} className="booking-list-div1">
             <div className="booking-schedule-details">
               <div className="booking-flight-detail">

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import "./SeatLayout.css";
 import { useSelector } from "react-redux";
 import BookingDetails from "../BookingDetails/BookingDetails";
+import paymentsImg from "./Images/image.png";
+import planelayout from "./Images/planelayout.png";
 
 export default function SeatLayout() {
   const [seats, setSeats] = useState([]);
@@ -74,6 +76,8 @@ export default function SeatLayout() {
   }
 
   var [scheduleId, setScheduleId] = useState(selectedFlight.scheduleId);
+  var [FlightId, setFlightId] = useState(selectedFlight.flightNumber);
+  console.log(FlightId);
   var [userId, setUserId] = useState(sessionStorage.getItem("userId"));
   var [bookingTime, seatBookingTime] = useState(Date.now);
   var [passengersIds, setPassengers] = useState(passengerIds);
@@ -135,9 +139,10 @@ export default function SeatLayout() {
         </div>
       </div>
       <div className="seat-layout-div">
+        <img className="planelayout" src={planelayout} style={{ width: '65%', height: '120%',marginTop: "10%",marginRight:"50%" }} />
         <div className="seat-selection">
           <div className="seat-arrangement">
-            {seats.map((seat, index) => (
+            {seats.filter(cb => cb.flightNumber === FlightId).map((seat, index) => (
               <div
               key={index}
               className={`flight ${
@@ -149,11 +154,10 @@ export default function SeatLayout() {
               }`}
               onClick={() => SelectSeat(seat.seatNumber)}
             >
-                <div id="seats"> {seat.seatNumber}</div>
+                  <div id="seats"style={{ fontSize: '10px' }}> {seat.seatNumber}</div>
               </div>
             ))}
           </div>
-          <div className="passage"></div>
         </div>
         <button onClick={Payments} className="pay-btn">
           Make Payment
@@ -162,10 +166,13 @@ export default function SeatLayout() {
       {payments && (
         <div className="payments">
           <div className="payment-form mt-4 payment-form-div">
-            <h4>Payment Details</h4>
+            <div>
+            <h4>Enter your Payment Details</h4>
+            <img className="payments-img" src={paymentsImg} />
+            </div>
             <div className="mb-3">
               <label htmlFor="cardNumber" className="form-label">
-                Card Number
+                Card Number*
               </label>
               <input
                 type="text"
@@ -178,7 +185,7 @@ export default function SeatLayout() {
             </div>
             <div className="mb-3">
               <label htmlFor="expiryDate" className="form-label">
-                Expiry Date
+                Expiry Date*
               </label>
               <input
                 type="text"
@@ -192,7 +199,7 @@ export default function SeatLayout() {
             </div>
             <div className="mb-3">
               <label htmlFor="cvv" className="form-label">
-                CVV
+                CVV*
               </label>
               <input
                 type="password"
