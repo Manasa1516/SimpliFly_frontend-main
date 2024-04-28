@@ -7,10 +7,31 @@ import vistara from "../../Assets/Images/vistara.png";
 
 export default function GetCancelBookings() {
   var [bookings, setBooking] = useState([]);
-  var userId = sessionStorage.getItem("ownerId");
+  var userId = sessionStorage.getItem("userId");
+  var username = sessionStorage.getItem("username");
+console.log(username);
+
   const token = sessionStorage.getItem("token");
   const [currentPage, setCurrentPage] = useState(1);
+  const [user, setUser] = useState(null);
   const bookingsPerPage = 4;
+
+  useEffect(() => {
+    const httpHeader = {
+      headers: { Authorization: "Bearer " + token },
+    };
+    axios
+      .get(
+        `http://localhost:5256/api/users/GetCustomerByUsername?username=${username}`,
+        httpHeader
+      )
+      .then(function (response) {
+        setUser(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, [username, token]);
 
   useEffect(() => {
     const httpHeader = {
@@ -92,39 +113,6 @@ export default function GetCancelBookings() {
     }
   };
 
-  const handleRefundStatusUpdate = (bookingId, newStatus) => {
-    const httpHeader = {
-      headers: { Authorization: "Bearer " + token },
-    };
-    axios
-      .put(
-        `http://localhost:5256/api/Bookings/UpdateRefundStatus`,
-        { id: bookingId, refundStatus: newStatus },
-        httpHeader
-      )
-      .then(function (response) {
-        console.log(response.data);
-        alert("Refund status update successful");
-        // Refresh the bookings list
-        axios
-          .get(
-            `http://localhost:5256/api/users/GetAllCancelledBookings`,
-            httpHeader
-          )
-          .then(function (response) {
-            const sortBookings = response.data.sort((a, b) => new Date(b.bookingTime) - new Date(a.bookingTime));
-            setBooking(sortBookings);
-            console.log(response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      })
-      .catch(function (error) {
-        console.error("Error:", error);
-        alert("Error updating refund status.");
-      });
-  };
 
   const indexOfLastBooking = currentPage * bookingsPerPage;
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
@@ -135,71 +123,44 @@ export default function GetCancelBookings() {
   return (
     <div className="bookings-div">
       <div className="get-bookings-div">
-        {currentBookings.map((booking, index) => (
-          <div key={index} className="booking-list-div1">
-            <div className="booking-schedule-details">
-              <div className="booking-flight-detail">
-                <img
-                  src={getAirlineImage(booking.booking.schedule.flight.airline)}
-                  className="airline-logo"
-                />
+      {currentBookings.map((booking, index)=> (
+    <div key={index} className="booking-list-div1">
+        <div className="booking-schedule-details">
+            <div className="booking-flight-detail">
+                <img src={getAirlineImage(booking.booking.schedule.flight.airline)} className="airline-logo" />
                 <div>
-                  <p className="-bookingflight-details">
-                    {booking.booking.schedule.flight.airline}
-                  </p>
-                  <p className="booking-flight-details">
-                    {booking.booking.schedule.flightNumber}
-                  </p>
+                    <p className="-bookingflight-details">{booking.booking.schedule.flight.airline}</p>
+                    <p className="booking-flight-details">{booking.booking.schedule.flightNumber}</p>
                 </div>
-              </div>
-              <div className="flight-source">
-                <p className="flight-details">
-                  {booking.booking.schedule.route.sourceAirport.city}
-                </p>
-                <p className="flight-details">
-                  {getDate(new Date(booking.booking.schedule.departure)).formattedTime}
-                </p>
-              </div>
-              <p className="time-diff">
-                {getTimeDifference(
-                  booking.booking.schedule.departure,
-                  booking.booking.schedule.arrival
-                )}
-              </p>
-              <div className="flight-destination">
-                <p className="flight-details">
-                  {booking.booking.schedule.route.destinationAirport.city}
-                </p>
-                <p className="flight-details">
-                  {getDate(new Date(booking.booking.schedule.arrival)).formattedTime}
-                </p>
-              </div>
-              <div className="refund-status-container">
-  <select
-    className="refund-status-select"
-    value={booking.refundStatus}
-    onChange={(e) => handleRefundStatusUpdate(booking.id, e.target.value)}
-  >
-    <option value="Refund Issued">Refund Issued</option>
-    <option value="Cancelled">Cancelled</option>
-  </select>
-</div>
-
             </div>
-            <div className="booking-passenger-details">
-              <div>
-                Booking Date :{" "}
-                <b>{getDate(new Date(booking.booking.bookingTime)).formattedDate}</b>
-              </div>
-              <div>
+            <div className="flight-source">
+                <p className="flight-details">{booking.booking.schedule.route.sourceAirport.city}</p>
+                <p className="flight-details">{getDate(new Date(booking.booking.schedule.departure)).formattedTime}</p>
+            </div>
+            <p className="time-diff">
+                {getTimeDifference(booking.booking.schedule.departure, booking.booking.schedule.arrival)} hours
+            </p>
+            <div className="flight-destination">
+                <p className="flight-details">{booking.booking.schedule.route.destinationAirport.city}</p>
+                <p className="flight-details">{getDate(new Date(booking.booking.schedule.arrival)).formattedTime}</p>
+            </div>
+            <div className="refund-status-container">
+            </div>
+        </div>
+        <div className="booking-passenger-details">
+            <div>
+                Booking Date : <b>{getDate(new Date(booking.booking.bookingTime)).formattedDate}</b>
+            </div>
+            <div>
                 Booked By : <b>{GetUser(booking.booking.userId)}</b>
-              </div>
-              <div>
-                Refund Status : <b>{booking.refundStatus}</b>
-              </div>
             </div>
-          </div>
-        ))}
+            <div>
+                Refund Status : <b>{booking.refundStatus}</b>
+            </div>
+        </div>
+    </div>
+))}
+
         <div className='pagination'>
           {bookings.length > bookingsPerPage && (
             <button onClick={() => paginate(currentPage - 1)}>Previous</button>
