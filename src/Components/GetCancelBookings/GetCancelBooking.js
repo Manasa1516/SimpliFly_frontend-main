@@ -183,7 +183,7 @@ export default function GetCancelBookings() {
     onChange={(e) => handleRefundStatusUpdate(booking.id, e.target.value)}
   >
     <option value="Refund Issued">Refund Issued</option>
-    <option value="Cancelled">Cancelled</option>
+    <option value="Cancelled">Refund Declined</option>
   </select>
 </div>
 

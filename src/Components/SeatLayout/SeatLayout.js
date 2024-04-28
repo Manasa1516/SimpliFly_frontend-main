@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import BookingDetails from "../BookingDetails/BookingDetails";
 import paymentsImg from "./Images/image.png";
 import planelayout from "./Images/planelayout.png";
+import seatlayout from "./Images/seatlayout.png";
 
 export default function SeatLayout() {
   const [seats, setSeats] = useState([]);
@@ -133,13 +134,14 @@ export default function SeatLayout() {
     <div className="seat-layout">
       <div className="seat-color-div">
         <div className="seat-availability">
+          <img src={seatlayout} style={{width: '270%' , height:'700%',marginLeft: "650%",marginBottom: "-90%",marginTop:"50%"}}/>
         <div><p className="booked-seats"></p>Booked Seats</div>
         <div><p className="avilable-seats"></p>Available Seats</div>
         <div><p className="selected-seats"></p>Selected Seats</div>
         </div>
       </div>
       <div className="seat-layout-div">
-        <img className="planelayout" src={planelayout} style={{ width: '65%', height: '120%',marginTop: "10%",marginRight:"50%" }} />
+        <img className="planelayout" src={planelayout} style={{ width: '100%', height: '120%',marginTop: "10%",marginRight:"50%" }} />
         <div className="seat-selection">
           <div className="seat-arrangement">
             {seats.filter(cb => cb.flightNumber === FlightId).map((seat, index) => (
@@ -154,7 +156,7 @@ export default function SeatLayout() {
               }`}
               onClick={() => SelectSeat(seat.seatNumber)}
             >
-                  <div id="seats"style={{ fontSize: '10px' }}> {seat.seatNumber}</div>
+                  <div id="seats"style={{ fontSize: '9px' }}> {seat.seatNumber}</div>
               </div>
             ))}
           </div>
