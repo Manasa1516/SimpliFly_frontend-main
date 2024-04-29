@@ -4,6 +4,8 @@ import GetSchedule from '../GetSchedule/GetSchedule'
 import AddSchedule from '../AddSchedule/AddSchedule';
 import DeleteSchedule from '../DeleteSchedule/DeleteSchedule';
 import UpdateSchedule from '../UpdateSchedule/UpdateSchedule';
+import mybooking from "./Images/mybooking.png";
+import useronline from "./Images/useronline.png";
 
 export default function ManageSchedule() {
   const [sidebarVisible, setSidebarVisible] = useState(true);
@@ -19,75 +21,43 @@ export default function ManageSchedule() {
   return (
     <div>
       <div className="container-body">
-        {sidebarVisible && <div className="sidebar" id='sidebar'>
+        {sidebarVisible && <div className="account-sidebar" id='account-sidebar'>
             <div className="sidebar-container">
-            <div className="sidebar-options" onClick={()=>{
+            <div className="dashboard-heading">
+            <img src={useronline} className="user-online" style={{ display: "block", height: "50%", width:"50%",marginBottom: "10px",marginLeft:"70px" }}/>
+          <h2 style={{ fontSize: "20px", color: "white",textAlign: "center"}}>Dashboard</h2>
+          </div>
+            <div className="sidebar-option" onClick={()=>{
               setAddSchedule(true);
               setGetSchedule(false);
               setUpdateSchedule(false)
               setDeleteSchedule(false)
-            }}style={{
-              backgroundColor: "#dddddc", // Red color
-              color: "black",
-              padding: "10px",
-              marginBottom: "5px",
-              cursor: "pointer",
-              transition: "background-color 0.3s" // Smooth transition
-            }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = "#848484"} // Darken color on hover
-            onMouseLeave={(e) => e.target.style.backgroundColor = "#dddddc"}>
-                Add Schedule
+            }}><div style={{ display: "flex", alignItems: "left", marginRight:"60px" }}>
+            <img src={mybooking} alt="Profile" style={{ width: "20px", height: "20px", marginRight: "5px",opacity:"50px" }} /> AddSchedule</div>
             </div>
-            <div className="sidebar-options" onClick={()=>{
+            <div className="sidebar-option" onClick={()=>{
               setAddSchedule(false);
               setGetSchedule(true);
               setUpdateSchedule(false)
               setDeleteSchedule(false)
-            }}style={{
-              backgroundColor: "#dddddc", // Red color
-              color: "black",
-              padding: "10px",
-              marginBottom: "5px",
-              cursor: "pointer",
-              transition: "background-color 0.3s" // Smooth transition
-            }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = "#848484"} // Darken color on hover
-            onMouseLeave={(e) => e.target.style.backgroundColor = "#dddddc"}>
-                Get Schedules
+            }}><div style={{ display: "flex", alignItems: "left", marginRight:"65px" }}>
+            <img src={mybooking} alt="Profile" style={{ width: "20px", height: "20px", marginRight: "5px",opacity:"50px" }} /> GetSchedule</div>
             </div>
-            <div className="sidebar-options" onClick={()=>{
+            <div className="sidebar-option" onClick={()=>{
               setAddSchedule(false);
               setGetSchedule(false);
               setUpdateSchedule(true)
               setDeleteSchedule(false)
-            }}style={{
-              backgroundColor: "#dddddc", // Red color
-              color: "black",
-              padding: "10px",
-              marginBottom: "5px",
-              cursor: "pointer",
-              transition: "background-color 0.3s" // Smooth transition
-            }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = "#848484"} // Darken color on hover
-            onMouseLeave={(e) => e.target.style.backgroundColor = "#dddddc"}>
-                Update Schedule
+            }}><div style={{ display: "flex", alignItems: "left", marginRight:"50px" }}>
+            <img src={mybooking} alt="Profile" style={{ width: "20px", height: "20px", marginRight: "5px",opacity:"50px" }} /> Update Schedule</div>
             </div>
-            <div className="sidebar-options" onClick={()=>{
+            <div className="sidebar-option" onClick={()=>{
               setAddSchedule(false);
               setGetSchedule(false);
               setUpdateSchedule(false)
               setDeleteSchedule(true)
-            }}style={{
-              backgroundColor: "#dddddc", // Red color
-              color: "black",
-              padding: "10px",
-              marginBottom: "5px",
-              cursor: "pointer",
-              transition: "background-color 0.3s" // Smooth transition
-            }}
-            onMouseEnter={(e) => e.target.style.backgroundColor = "#848484"} // Darken color on hover
-            onMouseLeave={(e) => e.target.style.backgroundColor = "#dddddc"}>
-                Remove Schedule
+            }}><div style={{ display: "flex", alignItems: "left", marginRight:"50px" }}>
+            <img src={mybooking} alt="Profile" style={{ width: "20px", height: "20px", marginRight: "5px",opacity:"50px" }} /> Delete Schedule</div>
             </div>
         </div>
         </div>}

@@ -94,4 +94,7 @@
     color: inherit; /* Use the same color as the default text color */
     cursor: pointer; /* Change cursor to pointer on hover */
   }
+.container-main{
+    background-color: transparent;
+}
   

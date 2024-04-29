@@ -8,6 +8,7 @@ import vistara from "../../Assets/Images/vistara.png";
 export default function GetSchedule() {
     const [schedules, setSchedules] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const flightOwnerId = sessionStorage.getItem("ownerId");
     const schedulesPerPage = 4;
 
     function getDate(date) {

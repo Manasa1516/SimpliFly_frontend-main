@@ -111,3 +111,10 @@
   input:focus, select:focus {
     outline: none;
   }
+  .register-user span:hover {
+    text-decoration: underline;
+  }
+  .register-user span {
+    color: blue;
+    cursor: pointer;
+  }

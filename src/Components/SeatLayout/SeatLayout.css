@@ -69,14 +69,7 @@
     align-items: center;
     justify-content: center;
 }
-.passage{
-    height: 90%;
-    width:0.6%;
-    background-color: slategrey;
-    position: absolute;
-    left: 41.2%;
-    margin-left: -40px;
-}
+
 .booked {
     background-color: red; 
     display: flex;
@@ -164,9 +157,7 @@
   width: 50%;
   margin: 10px;
 }
-.passage{
-  width: 4%;
-}
+
 .payment-form-div{
   width: 80%;
 }

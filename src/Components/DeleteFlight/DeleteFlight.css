@@ -5,7 +5,7 @@
     width: 50%;
     box-shadow: 2px 2px 14px rgb(216, 205, 205);
     border-radius: 5px;
-    background-color: gainsboro;
+    background-color: white;
   }
 .delete-flight-detail-div{
     width: 100%;
@@ -22,9 +22,11 @@
   text-align: center;
   display: flex;
   justify-content: center;
-  background-color: #ffe064;
-  border-color:#ffe064 ;
+  background-color: #5444dc;
+  border-color:#5444dc ;
+  color: white;
 }
 .delete-flight-btn:hover{
-  background-color: goldenrod;
+  background-color: white;
+  color: #5444dc;
 }

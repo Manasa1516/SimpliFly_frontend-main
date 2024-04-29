@@ -5,7 +5,8 @@
     width: 80%;
     box-shadow: 2px 2px 14px rgb(216, 205, 205);
     border-radius: 5px;
-    background-color: #b7b7b6;
+    background-color: white;
+    margin-left: 10%;
   }
   .delete-options-div {
     display: flex;
@@ -51,9 +52,11 @@ width: 100%;
       font-size: 18px;
     font-weight: 500;
     width: 40%;
-    background-color: #ffe064 ;
-    border-color: #ffe064;
+    background-color: #5662de ;
+    border-color: #5662de;
+    color: white;
   }
   .delete-date-schedule-btn:hover,.delete-schedule-btn:hover{
-    background-color: goldenrod;
+    background-color: white;
+    color: #5662de;
   }

@@ -155,10 +155,13 @@ else {
         <div className="login-div">
           <h3></h3>
           <h3></h3>
-          <h3>Login</h3>
+          <h3>Welcome Back</h3>
+          
           <div className="login-img"><img src={loginImage} alt="Login Image" /></div>
           <form>
+          
             <div className="username-div">
+              <h2> </h2>
               <img src={userImg} />
               <input
                 type="text"
@@ -182,17 +185,12 @@ else {
               />
             </div>
             <span style={{ color: 'red' }}>{passwordError}</span>
+            <h6 className="forgot-password" onClick={()=>navigate('/UpdatePassword')}>forgot password?</h6>
             <input type="submit" value="Login" id="login-btn" onClick={Login} />
             <span style={{ color: 'red' }}>{formError}</span>
-            <h6 className="forgot-password" onClick={()=>navigate('/UpdatePassword')}>forgot password?</h6>
+            <h6 className="register-user" style={{ color: 'blue', cursor: 'pointer' }} onClick={()=>navigate('/registerUser')}>Sign Up as Customer</h6>
+            <h6 className="register-user" style={{ color: 'blue', cursor: 'pointer' }} onClick={()=>navigate('/register')}>Sign Up as Flight Owner</h6>
           </form>
-          <p className="register-text"style={{ color: 'blue' }}>
-            Don't have account? Register as-<br/>
-            <span id="registerhere-text">
-              <button className='register-option-btn' onClick={()=>navigate('/registerUser')}>Customer</button>
-              <button className='register-option-btn' onClick={()=>navigate('/register')}>FlightOwner</button>
-            </span>
-          </p>
         </div>
       </div>
     </div>

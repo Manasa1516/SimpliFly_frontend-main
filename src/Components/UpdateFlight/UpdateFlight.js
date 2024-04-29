@@ -165,12 +165,10 @@ export default function UpdateFlight() {
       <div className="update-flight-div">
         <div className="update-options-div">
           <div className="update-seats-btn" onClick={()=>{
-            setUpdateAirline(false);
             setUpdateSeats(true);
             setUpdateStatus(false);
           }}>Update Seats</div>
           <div className="update-seats-btn" onClick={()=>{
-            setUpdateAirline(false);
             setUpdateSeats(false);
             setUpdateStatus(true);
           }}>Update Status</div>
@@ -222,7 +220,7 @@ export default function UpdateFlight() {
           </select>
                     </div>
                     <div className="status-input-div">
-                        <label htmlFor="status"style={{ marginLeft: '150px' }}><b>Status :</b> </label>
+                        <label htmlFor="status"style={{ marginLeft: '144px' }}><b>Status :</b> </label>
                         <input type="number" placeholder="Enter Status" value={status} onChange={(e)=>setStatus(e.target.value)}style={{ marginLeft: '77px' }}/>
                     </div>
                     <button type='button' className='update-flight-btn' onClick={UpdateFlightStatus}>Update Flight</button>

@@ -6,22 +6,29 @@
     display: flex;
 }
 .sidebar{
-    background-color: #c6c6c6;
+    background-color: white;
+    border-color: white;
+    box-shadow: none;
     width: 25%;
     height: 100%;
     display: flex;
     justify-content: center;
-    box-shadow: 2px 2px 14px rgb(243, 235, 235);
 
 }
 .sidebar-container{
-    background-color: #c6c6c6;
+    background-color: white;
+    border-color: white;
+    box-shadow: none;
     margin-top: 30%;
     height: 70%;
     width: 90%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.sidebar-container1{
+    background-color: white;
+    border-color: white;
 }
 .sidebar-options{
     width: 60%;
@@ -34,14 +41,12 @@
     font-size: 18px;
     font-weight: bold;
     font-family: 'Roboto Slab', serif;
-    background-color: #585858;
-
 }
 .sidebar-options:hover{
     cursor: pointer;
-    background-color:#585858;
 }
 .container-main{
+    background-color: white;
     margin-top: 19%;
     width: 75%;
     height: 100%;
@@ -50,6 +55,8 @@
     align-items: center;
 }
 .get-flight,.add-flight,.update-flight,.delete-flight{
+    margin-top: -700px;
+    margin-right: -600px;
     width: 60%;
 }
 
