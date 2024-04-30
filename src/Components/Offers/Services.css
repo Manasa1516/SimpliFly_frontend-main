@@ -20,3 +20,20 @@
 .btn-nav {
     margin-top: 10px;
 }
+@media (max-width: 768px)  {
+    .service-head{
+        margin-top: 90%;
+    }
+
+    .container img
+    {
+        margin-top: 120px;
+    }
+}
+
+
+@media (max-width: 769px)  {
+    .service-head{
+        margin-top: 50%;
+    }
+}

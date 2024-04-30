@@ -206,8 +206,8 @@ export default function HomeComponent() {
                 {errorPassengers && <span className="error-message"style={{ color: "red" }}>{errorPassengers}</span>}
               </div>
             </div>
-            <h6 style={{ marginLeft: "10px" }}>Seat Class</h6>
-            <select
+            <h4 style={{ marginLeft: '10px' }} className="seatclass-text">Seat Class</h4>
+                        <select
               className="seatClass"
               value={SeatClass}
               onChange={handleSeatClassChange}

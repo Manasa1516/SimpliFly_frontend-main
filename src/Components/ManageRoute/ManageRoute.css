@@ -47,3 +47,46 @@
 .get-routes,.add-routes,.delete-routes{
     width: 80%;
 }
+@media (max-width: 900px) {
+    
+    .options-div{
+        display: block;
+    }
+
+    .sidebar-options{
+        width: 90% !important;
+        height:  auto;
+    }
+
+    .add-route-div{
+        width: 116% !important;
+        margin-left: -8% !important;
+        margin-top: 32px;
+    }
+
+    .add-route-div select{
+        width: 70% !important;
+    }
+
+    .add-route-div input{
+        width: 70% !important;
+    }
+
+    .source-airport-div{
+        gap: 20px !important;
+    }
+
+    .pagination {
+        margin-left: 72px !important;
+    }
+
+    .delete-route-div{
+        width: 116% !important;
+        margin-left: -8% !important;
+        margin-top: 32px;
+    }
+
+    .get-route-div{
+        margin-top: 32px;
+    }
+}

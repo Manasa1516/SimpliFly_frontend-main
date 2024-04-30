@@ -1,40 +1,111 @@
-.flight-detail-div{
+/* Base styles */
+.flight-detail-div {
     display: flex;
     justify-content: space-between;
     margin: 10px;
     width: 70%;
-    
-}
-.add-flight-div{
+  }
+  
+  .add-flight-div {
     background-color: white;
     box-shadow: 2px 2px 14px rgb(216, 205, 205);
     padding: 10px;
     width: 90%;
     height: 120%;
     border-radius: 10px;
-}
-.add-flight-btn{
+  }
+  
+  .add-flight-btn {
     margin: 10px;
     width: 20%;
     font-size: 18px;
     background-color: #5444dc;
     border-color: #5444dc;
     color: white;
-}
-.add-flight-btn:hover{
+  }
+  
+  .add-flight-btn:hover {
     background-color: white;
     color: #5444dc;
-}
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 900px) {
+    .add-flight-div {
+        margin-top: 100px;
+        margin-left: -300px;
+      width: 100%;
+    }
+  
+    .add-flight-btn {
+      width: 40%;
+    }
+  
+    .flight-detail-div input {
+        width: 50%;
+      }
+    .flight-detail-div label{
+        font-size: 10px;
+    }
+  }
+  @media (max-width: 900px) {
+    #manage-flight-sidebar{
+        display: none;
+        width: 100%;
+    }
+    .get-flight,.add-flight,.update-flight,.delete-flight{
+        width: 100%;
+    }
 
+    .account-sidebar{
+        width: 120% !important;
+        margin-left: 30% !important;
+    }
 
-@media (max-width: 900px) {
-.add-flight-div{
-    width: 100%;
+    .sidebar-container{
+       width: 120% !important;
+    }
+
+    .add-flight-div{
+        margin-left: -75% !important;
+        width: 20%;
+    }
+    .delete-flight-div{
+        margin-left: -75% !important;
+        width: 90% !important;
+    }
+    .update-flight-div{
+        margin-left: -75% !important;
+        width: 100% !important;
+        gap: 20px !important;
+    }
+    .get-flight-div{
+        margin-left: -75% !important;
+        width: 105% !important;
+        height: auto !important;
+    }
+    .flightnumber-input-div label,
+    .seats-input-div label,
+    .status-input-div label,
+    .airline-input-div label {
+        margin-left: -11% !important; 
+        display: block; /* Display labels as block elements */
+        text-align: left; /* Align text to the left */
+  }
+
+  .flightnumber-input-div select,
+  .status-input-div  select,
+  .airline-input-div input,
+  .seats-input-div input[type='number'] {
+    /* Styles for inputs */
+    width: 100%; /* Make inputs fill the available width */
+    margin-right: -17% !important;  
+    margin-top: 5px !important;
+  }
+
+  .status-input-div label{
+    margin-top: 10% !important;
+  }
+    
 }
-.add-flight-btn{
-    width: 40%;
-}
-.flight-detail-div{
-    width: 96%;
-}
-}
+  

@@ -8,6 +8,12 @@ export default function DeleteRoute() {
   var routeDetail = {};
 
   var DeleteFlightRoute=(e)=>{
+    e.preventDefault();
+
+    if (!sourceAirport || sourceAirport === "0" || !destinationAirport || destinationAirport === "0") {
+      document.getElementById('error-message').innerText = 'Please select both source and destination airports.';
+      return;
+    }
     const confirmDelete = window.confirm(`Are you sure you want to remove the route?`);
     if(confirmDelete){
       e.preventDefault();
@@ -88,6 +94,7 @@ export default function DeleteRoute() {
       <button type="button" className="delete-route-btn" onClick={DeleteFlightRoute}>
         Remove Route
       </button>
+      <div id="error-msg" className="error-msg"></div>
     </div>
   )
 }

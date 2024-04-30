@@ -18,12 +18,106 @@ export default function RegisterUser() {
   var [email,setEmail]=useState("");
   var [phone,setPhone]=useState("");
   var [gender,setGender]=useState("male")
+  const [usernameError, setUserNameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [contactNumberError, setContactNumberError] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [nameError, setNameError] = useState('');
+
+  const [formError, setFormError] = useState('');
+  const [ registerformError, setRegisterFormError] = useState('');
+
+  const validateUsername = (Name) => {
+    if (!Name) {
+      setUserNameError("Please enter a name");
+      return false;
+    } else if (/^[^a-zA-Z]/.test(Name)) {
+      setUserNameError("Name should start with a letter");
+      return false;
+    } else {
+      setUserNameError("");
+      return true;
+    }
+  };
+  const validatepassword = (Password) => {
+    if (!Password) {
+      setPasswordError("Please enter a password");
+      return false;
+    } 
+    else if(Password.length<6){
+      setPasswordError("Password must be more than 6 character")
+      return false;
+    }
+    else if (/^[a-zA-Z0-9]+$/.test(Password)) {
+      setPasswordError("Password should be alphanumeric");
+      return false;
+    } else {
+      setPasswordError("");
+      return true;
+    }
+  };
+  const validatecontNumber = (ContactNumber) => {
+    // Regular expression to match a typical phone number format
+    const phoneRegex = /^\d{10}$/; // This assumes a 10-digit phone number
+  
+    if (!ContactNumber) {
+      setContactNumberError("Please enter a contact number.");
+      return false;
+    } else if (!phoneRegex.test(ContactNumber)) {
+      setContactNumberError("Please enter a valid 10-digit contact number.");
+      return false;
+    } else {
+      setContactNumberError("");
+      return true;
+    }
+  };
+  const validatemail = (Mail) => {
+    // Regular expression to match a typical email address format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  
+    if (!Mail) {
+      setEmailError("Please enter an email address.");
+      return false;
+    } else if (!emailRegex.test(Mail)) {
+      setEmailError("Please enter a valid email address.");
+      return false;
+    }
+    else
+    {
+    // Clear the email error if it passes validation
+    setEmailError("");
+    return true;
+  }
+  };
+  
+  const validatename = (Name) => {
+    if (!Name) {
+      setNameError("Please enter a name");
+      return false;
+    } else if (/[^a-zA-Z]/.test(Name)) {
+      setNameError("Please enter a valid  name");
+      return false;
+    } else {
+      setNameError("");
+      return true;
+    }
+  };
 
   var user={}
   
   var Register=(e)=>{
+    if (validatename(name) && validatemail(email) && validatecontNumber(phone)){
+      setNameError("");
+      setEmailError("");
+      setContactNumberError("");
+      setRegisterFormError("");
+    }
+    else {
+      setRegisterFormError("fill the required fields for registration")
+      }
     if(!name || !email || !phone){
-      alert("Enter all required details")
+      setRegisterFormError("Fill the above fields");
+      return;
     }
     
 e.preventDefault();
@@ -41,38 +135,41 @@ var RequestOption ={
     headers : {'Content-type':'application/json'},
     body : JSON.stringify(user)
   }
-
-  fetch("http://localhost:5256/api/User",RequestOption)
-      .then(res=>res.json())
-      .then(res=>{
-        console.log(res)
-        setRegisterMessage(true)
-      })
-      .catch(err=>{console.log(err)
-        alert("User already present")})
+  if (validatename(name) && validatecontNumber(phone) && validatemail(email)){
+    fetch("http://localhost:5256/api/User",RequestOption)
+        .then(res=>res.json())
+        .then(res=>{
+          console.log(res)
+          setRegisterMessage(true)
+        })
+        .catch(err=>{console.log(err)
+          alert("User already present")})
+    }
   }
-
   function DisplayUsernamePassword() {
     setDisplayUsernamePassword(true);
     setDisplayOtherDetailsDiv(false);
   }
 
   function DisplayOtherDetails() {
+    if (!validateUsername(username) || !validatepassword(password)){
+      return
+    }
     if(!username || !password){
-      alert("Please enter username and password");
+      setFormError("Fill the above fields");
       return;
     }
     if(password!=confirmPassword){
-      alert("Password and confirm password does not matched")
+      setFormError("Password and confirm password does not matched")
       return;
     }
-    if(password.length<6){
-      alert("Password must be more than 6 character")
-      return
-    }
+    setFormError("");
     setDisplayOtherDetailsDiv(true);
     setDisplayUsernamePassword(false);
   }
+
+  
+  
 
   return (
     <div>
@@ -85,14 +182,17 @@ var RequestOption ={
                 <img src={userimg}/>
                 <input type="text" id="username-input" placeholder="Enter your username" className="register-inputs" value={username} onChange={(e)=>setUsername(e.target.value)} required/>
             </div>
+            <span style={{ color: 'red',fontSize:'15px' }}>{usernameError}</span>
             <div className="password-div">
                 <img src={keyimg}/>
                 <input type="password" id="password-input" placeholder="Enter your password" className="register-inputs" value={password} onChange={(e)=>setPassword(e.target.value)} required/>
             </div>
+            <span style={{ color: 'red',fontSize:'15px' }}>{passwordError}</span>
             <div className="re-enter-password-div">
                 <img src={keyimg}/>
                 <input type="password" id="passwords-input" placeholder="Re-enter password" className="register-inputs" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} required/>
             </div>
+            <span style={{ color: 'red',fontSize:'15px',marginBottom:"30px" }}>{formError}</span>
             <button className="next-btn" onClick={DisplayOtherDetails}>Next</button>
             </div>}
             {displayOtherDetailsDiv && <div className="other-details-div" id="other-details-div">
@@ -101,29 +201,38 @@ var RequestOption ={
                 <input type="text" id="name-input" placeholder="Enter your name" className="register-inputs"
                 value={name} onChange={(e)=>setName(e.target.value)} required/>
             </div>
+            <span style={{ color: 'red',fontSize:'15px',marginRight:'60px' }}>{nameError}</span>
             <div className="email-div">
                 <label htmlFor="email">Email</label>
                 <input type="text" id="email-input" placeholder="Enter your email" className="register-inputs"
                 value={email} onChange={(e)=>setEmail(e.target.value)} required/>
             </div>
+            <span style={{ color: 'red',fontSize:'15px',marginRight:'10px' }}>{emailError}</span>
             <div className="contact-div">
                 <label htmlFor="contact">Contact</label>
                 <input type='tel' id="contact-input" placeholder="Enter your contact" className="register-inputs"
                 value={phone} onChange={(e)=>setPhone(e.target.value)} required/>
             </div>
+            <span style={{ color: 'red',fontSize:'15px',marginRight:'10px' }}>{contactNumberError}</span>
             <div className="registration-number-div">
-                <label htmlFor="registration-number">Gender</label>
-                <select value={gender} onChange={(e)=>setGender(e.target.value)}>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
+            <label>Gender</label>
+    <div className="radio-buttons">
+        <label htmlFor="male">Male</label>
+        <input type="radio" id="male" name="gender" value="male" checked={gender === "male"} onChange={(e) => setGender(e.target.value)} />
+
+        <label htmlFor="female">Female</label>
+        <input type="radio" id="female" name="gender" value="female" checked={gender === "female"} onChange={(e) => setGender(e.target.value)} />
+
+        <label htmlFor="other">Other</label>
+        <input type="radio" id="other" name="gender" value="other" checked={gender === "other"} onChange={(e) => setGender(e.target.value)} />
+    </div>
+</div>
             <div className="btns">
             <button className="back-btn" onClick={DisplayUsernamePassword}>Back</button>
             <button value="Register" id="register-btn" onClick={Register}>Register</button>
             </div>
             </div>}
+            <span style={{ color: 'red',fontSize:'15px',marginTop:'-30px' }}>{registerformError}</span>
         </div>
       {registerMessage && <RegisteredSuccessfully className="register-successfully-div"/>}
       </div>

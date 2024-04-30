@@ -11,6 +11,27 @@ export default function AddRoute() {
 
   var AddNewRoute = (e) => {
     e.preventDefault();
+    if (!sourceAirport || sourceAirport === "0") {
+      document.getElementById("source-error-msg").innerText = "Please select a source airport.";
+      return;
+    } else {
+      document.getElementById("source-error-msg").innerText = "";
+    }
+    
+    if (!destinationAirport || destinationAirport === "0") {
+      document.getElementById("destination-error-msg").innerText = "Please select a destination airport.";
+      return;
+    } else {
+      document.getElementById("destination-error-msg").innerText = "";
+    }
+    
+    if (!distance || parseFloat(distance) < 100) {
+      document.getElementById("distance-error-msg").innerText = "Distance must be at least 100.";
+      return;
+    } else {
+      document.getElementById("distance-error-msg").innerText = "";
+    }
+    
     routeDetail.sourceAirportId = parseInt(sourceAirport);
     routeDetail.destinationAirportId = parseInt(destinationAirport);
     routeDetail.distance = parseFloat(distance);
@@ -66,7 +87,7 @@ export default function AddRoute() {
             ))}
           </select>
         </div>
-
+        <div id="source-error-msg" className="error-msg"></div>
         <div className="destination-airport-div">
           <label htmlFor="destination-airport">
             <b>Destination Airport : </b>
@@ -83,6 +104,7 @@ export default function AddRoute() {
             ))}
           </select>
         </div>
+        <div id="destination-error-msg" className="error-msg"></div>
         <div className="distance-div">
           <label htmlFor="distance">
             <b>Enter Distance : </b>
@@ -93,6 +115,7 @@ export default function AddRoute() {
             onChange={(e) => setDistance(e.target.value)}
           />
         </div>
+        <div id="distance-error-msg" className="error-msg"></div>
       </form>
       <button type="button" className="add-route-btn" onClick={AddNewRoute}>
         Add Route

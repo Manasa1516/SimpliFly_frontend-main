@@ -15,5 +15,35 @@ download-ticket-btn {
   .download-ticket-btn:hover {
     background-color: #0056b3;
   }
+  @media (max-width: 900px){
+    .get-bookings-div1{
+      width: 40% !important; 
+      height: auto !important; /* Reset height to auto */
+      margin: 30px 0; /* Adjust margin for spacing */
+      margin-left: 190px;
+    }
+    .booking-passenger-details{
+      width: 75% !important;
+      margin-left: 10% !important;
+      gap: 29px !important;
+    }
+    .booking-schedule-details{
+      width: 75% !important;
+      margin-left: 10% !important;
+    }
+    #pagi-id{
+      margin-left: 100px !important;
+    }
+    .flight-detail-1{
+      display: flex;
+      gap: 20px !important;
+      font-weight: bold;
+    }
+    .airline-logo{
+      margin-top: -5px !important;
+      width: 56px !important;
+      height: auto !important;
+    }
+  }
   
   

@@ -11,7 +11,7 @@ export default function FlightOwnerHome() {
   var navigate=useNavigate()
   var username=sessionStorage.getItem('username')
   return (
-    <div>
+    <div className='flight-home'>
       <div className="flight-owner-home-main">
       </div>
         <div className='text'>

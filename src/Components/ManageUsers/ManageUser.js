@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./ManageUser.css";
 import GetUser from "../GetUser/GetUser";
 import GetFlightOwner from "../GetFlightOwner/GetFlightOwner";
+import useronline from "./Images/useronline.png";
 
 export default function ManageUser() {
   const [getUser, setGetUser] = useState(true);
@@ -14,6 +15,10 @@ export default function ManageUser() {
       <div className="container-body">
         <div className="sidebar">
           <div className="sidebar-container">
+          <div className="dashboard-heading">
+            <img src={useronline} className="user-online" style={{ display: "block", height: "50%", width:"50%",marginBottom: "10px",marginLeft:"70px" }}/>
+          <h2 style={{ fontSize: "20px", color: "white",textAlign: "center"}}>Dashboard</h2>
+          </div>
             <div
               className="sidebar-option"
               onClick={() => {

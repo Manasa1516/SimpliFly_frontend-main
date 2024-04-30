@@ -28,3 +28,8 @@
     background-color: white;
     color: #5662de;
 }
+.error-msg {
+    color: red;
+    font-size: 0.8em;
+    margin-top: 5px;
+  }

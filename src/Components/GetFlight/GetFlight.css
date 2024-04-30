@@ -46,7 +46,9 @@
 
 @media (max-width: 900px) {
     .flight-list-div{
-        width: 90%;
+        margin-top: 100px;
+        margin-left: -250px;
+        width: 100%;
     }
 }
 .pagination {

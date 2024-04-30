@@ -181,117 +181,152 @@
     background-color: gold;
  }
  @media (min-width: 769px) {
-    .home-main {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      grid-gap: 50px;
-      justify-content: center;
-      align-items: center;
-      height: 80vh;
-      padding: 0 20px;
-      background-image: url('./Images/background.png');
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      opacity: 0.8;
-    }
-  
-    .background-img {
-      opacity: 0.8;
-    }
-  
-    .flight-search-container {
-        margin: 0 auto; /* Center the box horizontally */
-        width: 70%; /* Adjust the width as needed */
-        padding: 50px;
-        background-color: white;
-        border-radius: 10px;
-        box-shadow: 10px 10px 10px rgba(69, 67, 67, 0.5);
-        display: flex;
-        justify-content: center; /* Center items horizontally */
-        align-items: center; /* Center items vertically */
-        opacity: 1;
-        gap: 30px; /* Remove box shadow for mobile view */
-    }
-
-    .source-destination-div {
-        margin-left: 10px;
-        display: flex;
-        align-items: center;
-        margin-bottom: 20px;
-        margin-right: 70px;
-        text-align: left;
-      }
+  .home-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 50px;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    padding: 0 20px;
+    background-image: url('./Images/background.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.8;
   }
-  @media (max-width: 768px) {
-    .home-main {
-        height: -30%;
-        width: 100%;
-    }
-  
-    .flight-search-container {
-        margin-top: 30px;
-        height: 85%;
-    }
-  
+
+  .background-img {
+    opacity: 0.8;
+  }
+
+  .flight-search-container {
+    margin: 0 auto;
+    /* Center the box horizontally */
+    width: 70%;
+    /* Adjust the width as needed */
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px rgba(69, 67, 67, 0.5);
+    display: flex;
+    justify-content: center;
+    /* Center items horizontally */
+    align-items: center;
+    /* Center items vertically */
+    opacity: 1;
+    gap: 30px;
+    /* Remove box shadow for mobile view */
+  }
+
+  .source-destination-div {
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    margin-right: 70px;
+    text-align: left;
     
   }
-  @media (max-width: 768px) {
-    .source-destination-div,
-    .departure-div,
-    .arrival-div,
-    .depart-date-div,
-    .passenger-count-div-adult,
-    .passenger-count-div-child,
-    .show-flights {
-      flex-direction: column;
-      align-items: flex-start;
-      margin-bottom: -5px; /* Add spacing between sections */
-      margin-left: 30px;
-    }
-    .seatClass{
-        width: -60%;
-        margin-left: -50%;
-    }
-  
-    .source-destination-div label,
-    .departure-div label,
-    .arrival-div label,
-    .depart-date-div label,
-    .passenger-count-div-adult label,
-    .passenger-count-div-child label
-     {
-      margin-right: 0;
-      margin-left: 40%;
-      margin-bottom: -15px;
-      text-align: center;
-      font-size: 18px;
-    }
-    .Search-flights-text{
-        margin-bottom: 3%;
-        margin-left: 38%;
-    }
-    .seatClass{
-        margin-left: 35% !important;
-    }
-    .source-destination-div input,
-    .departure-div input,
-    .arrival-div input,
-    .depart-date-div input,
-    .passenger-count-div-adult input,
-    .passenger-count-div-child input
-     {
-      width: 40%;
-      margin-bottom: 10px;
-      margin: 10px 150px;
+}
 
-    }
-  
-    .show-flights button {
-      width: 30%;
-      margin: 10px 170px;
-    }
+@media (max-width: 768px) {
+  .home-main {
+    height: -30%;
+    width: 100%;
   }
+
+  .flight-search-container {
+    margin-top: 40px;
+    height: 85%;
+  }
+
+  .Search-flights-text h2{
+      margin-top: 23px;
+      font-size: 24px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .source-destination-div,
+  .departure-div,
+  .arrival-div,
+  .depart-date-div,
+  .passenger-count-div-adult,
+  .passenger-count-div-child,
+  .show-flights {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: -5px;
+    /* Add spacing between sections */
+    margin-left: 30px;
+  }
+
+  .seatClass {
+    width: -60%;
+    margin-left: -50%;
+  }
+
+  .source-destination-div label,
+  .departure-div label,
+  .arrival-div label,
+  .depart-date-div label,
+  .passenger-count-div-adult label,
+  .passenger-count-div-child label {
+    margin-right: 0;
+    margin-left: 40%;
+    margin-bottom: -15px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .Search-flights-text {
+    margin-bottom: 3%;
+    margin-left: 38%;
+  }
+
+  .seatClass {
+    margin-left: 35% !important;
+  }
+
+  .seatclass-text{
+    margin-left: 35% !important;
+  }
+
+
+  .source-destination-div input,
+  .departure-div input,
+  .arrival-div input,
+  .depart-date-div input,
+  .passenger-count-div-adult input,
+  .passenger-count-div-child input {
+    width: 40%;
+    margin-bottom: 15px;
+    margin: 10px 150px;
+
+  }
+
+  .source-destination-div,
+  .departure-div,
+  .arrival-div,
+  .depart-date-div,
+  .passenger-count-div-adult ,
+  .passenger-count-div-child  {
+    margin-bottom: 10px;
+  
+  }
+
+  .error-message{
+    margin-left: 164px;
+  }
+
+  .show-flights button {
+    width: 30%;
+    margin: 10px 170px;
+  }
+}
 
   
 

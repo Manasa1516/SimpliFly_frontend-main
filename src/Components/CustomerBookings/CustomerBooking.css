@@ -34,17 +34,6 @@ width: 100%;
     margin: 4px;
 }
 
-@media (max-width: 900px) {
-    .bookings-div{
-        width: 100%;
-    }
-    .booking-list-div{
-        width: 100%;
-    }
-    .booking-schedule-details{
-        flex-direction: column;
-        }
-}
 .delete-user-btn{
     background-color: red;
     margin-left: -30px;
@@ -64,5 +53,34 @@ width: 100%;
   .download-ticket-button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
 }
+@media (max-width: 900px) {
+    .bookings-div{
+        width: 100%;
+    }
+    .booking-list-div {
+        width: 90% !important; 
+        height: auto !important; /* Reset height to auto */
+        margin: 10px 0; /* Adjust margin for spacing */
+    }
+    .booking-schedule-details{
+        flex-direction: column;
+    }
+    #pagi-id{
+        margin-left: 100px !important;
+    }
 
+    .download-ticket-button{
+        margin-right: 50% !important;
+        margin-top: 8px !important;
+    }
+
+    .delete-user-btn{
+        margin-left: 50% !important;
+        margin-top: -10% !important;
+    }
+
+    .date-seat-div {
+        margin-left: 30px !important;
+    }
+}
   

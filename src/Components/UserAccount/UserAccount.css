@@ -15,7 +15,8 @@
 @media (max-width: 900px) {
 .account-sidebar{
     display: none;
-    width: 100%;
+    width: 150%;
+    margin-left: -10%;
 }
 .get-User {
     margin-left: 5%;
@@ -29,6 +30,13 @@
     height: auto;
     margin: 10px;
 }
+.sidebar-container{
+    margin-left: -10% !important;
+    width: 60% !important;
+}
+.sidebar-option{
+    margin-left: 30%;
+}
 
 }
 .account-sidebar{
@@ -37,7 +45,7 @@
     box-shadow: none;
 }
 .container-body{
-    background-color: white;
+    background-color: transparent;
 }
 .dashboard-heading{
     

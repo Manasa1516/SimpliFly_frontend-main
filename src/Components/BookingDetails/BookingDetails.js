@@ -14,10 +14,56 @@ export default function BookingDetails() {
   var passengerIds = useSelector((state) => state.passengerIds);
   var [name, setName] = useState("");
   var [age, setAge] = useState("");
-  var [passpostNumber, setPassportNumber] = useState("");
+  var [passportNumber, setPassportNumber] = useState("");
   var navigate = useNavigate();
   var dispatch = useDispatch();
   var token = sessionStorage.getItem("token");
+
+  const [nameError, setNameError] = useState('');
+  const [ageError, setAgeError] = useState('');
+  const [passportNumberError, setPassportNumberError] = useState('');
+  const [formError, setFormError] = useState('');
+
+  const validatename = (Name) => {
+    if (!Name) {
+      setNameError("Please enter a name");
+      return false;
+    } else if (/[^a-zA-Z]/.test(Name)) {
+      setNameError("Please enter a valid passenger name");
+      return false;
+    } else {
+      setNameError("");
+      return true;
+    }
+  };
+  const validateage = (Age) => {
+    if (!Age) {
+      setAgeError("Please enter Age");
+      return false;
+    } else if (isNaN(Age) || Age < 0) {
+      setAgeError("Please enter a valid number");
+      return false;
+    } else {
+      setAgeError("");
+      return true;
+    }
+  };
+  const validatePassword = (PassportNumber) => {
+    if (!PassportNumber) {
+      setPassportNumberError("Please enter Passport no");
+      return false;
+    } else if (PassportNumber.length < 8) {
+      setPassportNumberError("It should contain atleast eight characters");
+      return false;
+    } else if (PassportNumber.length > 8) {
+      setPassportNumberError("It should n't exceed eight characters");
+      return false;
+    } 
+    else if (PassportNumber.length == 8) {
+      setPassportNumberError("");
+      return true;
+    }
+  };
 
   function getDate(date) {
     const formattedDate = date.toLocaleDateString();
@@ -59,12 +105,17 @@ export default function BookingDetails() {
       alert("You can add only " + totalPassengers + " passengers");
       return;
     }
-    if (!name || !age || !passpostNumber) {
-      alert("Please enter passenger details");
+    if (validatename(name) && validateage(age) && validatePassword(passportNumber)){
+      setNameError("");
+      setAgeError("");
+      setPassportNumberError("");
+    }
+    if (!name || !age || !passportNumber) {
+      setFormError("Please fix the errors before logging in.")
       return;
     }
     var isDuplicate = passengers.some(
-      (passenger) => passenger.passportNumber === passpostNumber
+      (passenger) => passenger.passportNumber === passportNumber
     );
     if (isDuplicate) {
       alert("Passenger with same passport number already added");
@@ -73,18 +124,19 @@ export default function BookingDetails() {
     var passenger = {
       name: name,
       age: parseInt(age),
-      passportNumber: passpostNumber,
+      passportNumber: passportNumber,
     };
-
-    setPassengers([...passengers, passenger]);
-
-    console.log(
-      "Passenger selected : " +
-        totalPassengers +
-        ", Passenger added : " +
-        totalAddedPassengers
-    );
-  }
+    if (validatename(name) && validateage(age) && validatePassword(passportNumber)){
+      setPassengers([...passengers, passenger]);
+      }
+      console.log(
+        "Passenger selected : " +
+          totalPassengers +
+          ", Passenger added : " +
+          totalAddedPassengers
+      );
+    }
+    
   function removePassenger(index) {
     const updatedPassengers = [...passengers];
     updatedPassengers.splice(index, 1);
@@ -184,6 +236,7 @@ export default function BookingDetails() {
           <div id="passengerList"></div>
           <div className="mb-3 border p-3">
             <h5>Passenger</h5>
+            <div>
             <label htmlFor="passengerName${index}" className="form-label">
               Name
             </label>
@@ -195,7 +248,9 @@ export default function BookingDetails() {
               onChange={handlePassengerNameChange}
               required
             />
-
+             <span style={{ color: 'red' }}>{nameError}</span>
+            </div>
+            <div>
             <label htmlFor="passengerAge${index}" className="form-label">
               Age
             </label>
@@ -207,7 +262,10 @@ export default function BookingDetails() {
               onChange={handlePassengerAgeChange}
               required
             />
+            <span style={{ color: 'red' }}>{ageError}</span>
 
+            </div>
+            <div>
             <label htmlFor="passengerAge${index}" className="form-label">
               Passport Number
             </label>
@@ -215,10 +273,12 @@ export default function BookingDetails() {
               type="text"
               className="form-control"
               id="passport${index}"
-              value={passpostNumber}
+              value={passportNumber}
               onChange={handlePassportNumberChange}
               required
             />
+            <span style={{ color: 'red' }}>{passportNumberError}</span>
+            </div>
           </div>
           <button
             type="button"
@@ -228,6 +288,7 @@ export default function BookingDetails() {
           >
             Add Passenger
           </button>
+          <span style={{ color: 'red' }}>{formError}</span>
         </div>
       </div>
       <h2>Passenger List</h2>

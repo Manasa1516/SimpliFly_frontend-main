@@ -13,6 +13,61 @@ export default function SeatLayout() {
   var [cvv, setCvv] = useState();
   var [expiry, setExpiry] = useState();
 
+  // changed here
+  const [cardNumberError, setcardNumberError] = useState('');
+  const [expiryError, setExpiryError] = useState('');
+  const [cvvError, setcvvError] = useState('');
+  const [formError, setFormError] = useState('');
+  //praneeth kumar
+  const validatecardNumber = (cardnumber) => {
+   if(!cardnumber)
+   {
+     setcardNumberError("Please enter cardNumber");
+     return false;
+   }
+   else if (cardnumber.length !== 16) {
+     setcardNumberError('Card number should contain exactly 16 characters.');
+     return false;
+   }
+    else 
+    {
+     setcardNumberError('');
+     return true;
+   }
+ };
+ const validexpiry = (Expiry) => {
+   if (!Expiry) {
+     setExpiryError("Please enter an expiry date");
+     return false;
+   }
+   const today = new Date();
+   const [month, year] = Expiry.split('/').map(Number);
+   const expiryDate = new Date(year, month - 1, 1); // Creating a date object with the entered month and year
+   // Check if the entered value matches the MM/YYYY format
+   if (/^(0[1-9]|1[0-2])\/\d{4}$/.test(Expiry) && expiryDate > today) {
+     // Check if expiry date is not in the past
+     setExpiryError('');
+     return true;
+   } else if (Expiry === '' || /^\d{0,2}\/$/.test(Expiry)) {
+     // Allow empty string or partially entered MM/
+     setExpiryError("Invalid Expiry date");
+     return false;
+   }
+ };
+ 
+ const validcvv = (CVV) => {
+   if (!CVV) {
+     setcvvError("Please enter CVV");
+     return false;
+   } else if (!/^\d{3}$/.test(CVV)) {
+     setcvvError("CVV should contain exactly 3 digits.");
+     return false;
+   } else {
+     setcvvError("");
+     return true;
+   }
+ };
+
   var selectedFlight = useSelector((state) => state.selectedFlight);
   var passengerIds = useSelector((state) => state.passengerIds);
 
@@ -97,10 +152,19 @@ export default function SeatLayout() {
   };
 
   function BookTicket() {
-    if(!cardNumber || !cvv || !expiry){
-      alert("Please enter card details")
-      return;
+    //change here
+    // Validate card number before proceeding
+    if (validatecardNumber(cardNumber) && validexpiry(expiry) && validcvv(cvv) ){
+      setcardNumberError("");
+      setcvvError("");
+      setExpiryError("");
     }
+    //till here
+    if(!cardNumber || !cvv || !expiry){
+      setFormError("Please fix the errors before logging in.")
+      return
+    }
+    setFormError("")
     bookingDetails.scheduleId=scheduleId;
     bookingDetails.userId=parseInt(userId);
     bookingDetails.bookingTime=new Date().toISOString();
@@ -117,17 +181,17 @@ export default function SeatLayout() {
       },
       body: JSON.stringify(bookingDetails),
     };
-
-    fetch(`http://localhost:5256/api/users/${userId}/bookings`, RequestOption)
-      .then((res) => res.json())
-      .then((res) => {
-        console.log("Response:", res);
-        alert("Booking added successfully");
-      })
-      .catch((err) => {
-        console.error("Error:", err);
-        alert("Error adding booking");
-      });
+    if(validatecardNumber(cardNumber) && validcvv(cvv) && validexpiry(expiry)){
+      fetch(`http://localhost:5256/api/users/${userId}/bookings`, RequestOption)
+        .then((res) => res.json())
+        .then((res) => {
+          console.log("Response:", res);
+          alert("Booking added successfully");
+        })
+        .catch((err) => {
+          console.error("Error:", err);
+        });
+      }
     
   }
   return (
@@ -185,6 +249,7 @@ export default function SeatLayout() {
                 onChange={handleCardNumberChange}
               />
             </div>
+            <span style={{ color: 'red' }}>{cardNumberError}</span>
             <div className="mb-3">
               <label htmlFor="expiryDate" className="form-label">
                 Expiry Date*
@@ -199,6 +264,7 @@ export default function SeatLayout() {
                 required
               />
             </div>
+            <span style={{ color: 'red' }}>{expiryError}</span>
             <div className="mb-3">
               <label htmlFor="cvv" className="form-label">
                 CVV*
@@ -212,7 +278,7 @@ export default function SeatLayout() {
                 required
               />
             </div>
-
+            <span style={{ color: 'red' }}>{cvvError}</span>
             <button
               type="button"
               className="btn btn-book-flight btn-block mt-3 book-ticket-btn"
@@ -220,6 +286,7 @@ export default function SeatLayout() {
             >
               Book Flight
             </button>
+            <span style={{ color: 'red' }}>{formError}</span>
           </div>
         </div>
       )}

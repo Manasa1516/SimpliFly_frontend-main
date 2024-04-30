@@ -66,10 +66,24 @@
 
 @media (max-width: 900px) {
     #manage-flight-sidebar{
-        display: none;
+        display: flex;
         width: 100%;
     }
     .get-flight,.add-flight,.update-flight,.delete-flight{
         width: 100%;
+    }
+    
+}
+@media (max-width: 768px) {
+    .container-main {
+        width: 90%;
+        margin-top: 10%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-main {
+        width: 100%;
+        margin-top: 5%;
     }
 }

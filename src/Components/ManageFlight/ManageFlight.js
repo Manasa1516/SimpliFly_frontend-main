@@ -34,7 +34,7 @@ export default function ManageFlight() {
   return (
     <div>
       <div className="container-body">
-        <div className="account-sidebar" id='account-sidebar'>
+        <div className="manage-flight-sidebar" id='manage-flight-sidebar'>
         <div className='sidebar-container'>
         <div className="dashboard-heading">
             <img src={useronline} className="user-online" style={{ display: "block", height: "50%", width:"50%",marginBottom: "10px",marginLeft:"70px" }}/>

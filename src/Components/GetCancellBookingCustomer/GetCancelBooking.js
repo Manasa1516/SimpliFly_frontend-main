@@ -9,8 +9,10 @@ export default function GetCancelBookings() {
   var [bookings, setBooking] = useState([]);
   var userId = sessionStorage.getItem("userId");
   const token = sessionStorage.getItem("token");
-  const [currentPage, setCurrentPage] = useState(1);
   const [users, setUsers] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bookingsPerPage, setBookingsPerPage] = useState();
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     const httpHeader = {
@@ -86,19 +88,34 @@ export default function GetCancelBookings() {
         return indigo;
     }
   };
+  // Update bookingsPerPage on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setBookingsPerPage(window.innerWidth <= 900 ? 1 : 4);
+    };
 
-  const bookingsPerPage = 4;
+    handleResize(); // Call initially to set bookingsPerPage
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+  console.log(bookingsPerPage, windowWidth);
+  
   var currentBookings = bookings.filter(cb => cb.booking.userId == userId);
   const indexOfLastBooking = currentPage * bookingsPerPage;
   const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
   const currentBookings1 = currentBookings.slice(indexOfFirstBooking, indexOfLastBooking);
 
-
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  
 
   return (
     <div className="bookings-div">
-      <div className="get-bookings-div">
+      <div className="get-bookings-div1">
       {currentBookings1.map((booking, index)=> (
     <div key={index} className="booking-list-div1">
         <div className="booking-schedule-details">
@@ -132,8 +149,7 @@ export default function GetCancelBookings() {
         </div>
         </div>
       ))}
-
-<div className='pagination'>
+      <div className='pagination' id="pagi-id">
             {(currentBookings.length > bookingsPerPage && currentPage > 1) && (
                 <button onClick={() => paginate(currentPage - 1)}>Previous</button>
             )}

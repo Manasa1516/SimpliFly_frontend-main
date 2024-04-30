@@ -12,12 +12,7 @@ export default function ManageRoute() {
   const [addRoute,setAddRoute]=useState(true)
   const [getRoute,setGetRoute]=useState(false)
   const [deleteRoute,setDeleteRoute]=useState(false)
-  function DisplayMain(){
-    var sidebar=document.getElementById('manage-flight-sidebar');
-    var mainContainer=document.getElementById('container-main')
-    sidebar.style.display="none"
-    mainContainer.style.display="flex"
-  }
+  
   return (
     <div>
       <div className="container-body">
@@ -27,7 +22,6 @@ export default function ManageRoute() {
             <img src={useronline} className="user-online" style={{ display: "block", height: "50%", width:"50%",marginBottom: "10px",marginLeft:"70px" }}/>
           <h2 style={{ fontSize: "20px", color: "white",textAlign: "center"}}>Dashboard</h2>
           </div>
-          <div className="more-profile-option"><img src={leftArrow} className="right-arrow" onClick={DisplayMain}/></div>
             <div className="sidebar-option" onClick={()=>{
               setAddRoute(true);
               setGetRoute(false);
