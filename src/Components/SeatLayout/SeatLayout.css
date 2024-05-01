@@ -58,7 +58,7 @@
     margin: 5px;
     margin-top: -20%;
     margin-left: 30px;
-    margin-right: 232%;
+    margin-right: 238%;
     
 }
 #seats{
@@ -80,7 +80,7 @@
   }
   .selected {
     background-color: rgb(55, 170, 93); 
-    display:inline-flex;
+    display:flexbox;
     justify-content: center;
   }
 #seats:hover{
@@ -140,8 +140,24 @@
 }
 
 @media (max-width: 900px) {
-  .seat-layout {
-    margin-top: 20%;
+  .seat-arrangement{
+    display: grid;
+    grid-template-columns: repeat(6, 20fr); 
+    grid-template-rows: repeat(12, 10%);
+    grid-gap: 13px; 
+    width: 20%;
+    height: 50%;
+    padding: 8px;
+    margin: 5px;
+    margin-bottom: 650%;
+    margin-top: 10%;
+    margin-left: 10px;
+    margin-right: 10%;
+    
+}
+.planelayout{
+  width: 180% !important;
+  margin-left: 60px !important;
 }
 .seat-color-div{
   display: none;
@@ -156,6 +172,7 @@
 .pay-btn{
   width: 50%;
   margin: 10px;
+  margin-top: -200%;
 }
 
 .payment-form-div{

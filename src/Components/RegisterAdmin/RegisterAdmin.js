@@ -3,6 +3,8 @@ import userimg from '../../Assets/Images/user.png'
 import keyimg from '../../Assets/Images/key.png'
 import RegisteredSuccessfully from "../RegisteredSuccessfullyMsg/RegisteredSuccessfully";
 import Registeruserimg from "./Images/image.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function RegisterAdmin() {
@@ -23,7 +25,7 @@ var admin={}
 
 var Register=(e)=>{
   if(!name || !email || !phone){
-    alert("Enter all required details")
+    toast("Enter all required details")
   }
     e.preventDefault();
     admin.username=username
@@ -49,7 +51,7 @@ var Register=(e)=>{
             setRegisterMessage(true)
           })
           .catch(err=>{console.log(err)
-          alert("User already present")})
+          toast("User already present")})
       }
 
       function DisplayUsernamePassword() {
@@ -59,11 +61,11 @@ var Register=(e)=>{
     
       function DisplayOtherDetails() {
         if(!username || !password){
-          alert("Please enter username and password");
+          toast("Please enter username and password");
           return;
         }
         if(password!=confirmPassword){
-          alert("Password and confirm password does not matched")
+          toast("Password and confirm password does not matched")
           return;
         }
         setDisplayOtherDetailsDiv(true);
@@ -125,6 +127,7 @@ var Register=(e)=>{
         </div>
       {registerMessage && <RegisteredSuccessfully className="register-successfully-div"/>}
       </div>
+      <ToastContainer/>
     </div>
   )
 }

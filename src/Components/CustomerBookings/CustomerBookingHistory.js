@@ -1,51 +1,84 @@
-import React, { useState } from 'react'
-import './CustomerBooking.css'
-import indigo from "../../Assets/Images/indigo.png";
-import airIndia from "../../Assets/Images/airindia.png";
-import vistara from "../../Assets/Images/vistara.png";
+import React, { useState, useEffect } from 'react';
+import './CustomerBooking.css';
+import indigo from '../../Assets/Images/indigo.png';
+import airIndia from '../../Assets/Images/airindia.png';
+import vistara from '../../Assets/Images/vistara.png';
 import jsPDF from 'jspdf';
-import boardingPassImage from "./Images/image.png";
+import boardingPassImage from './Images/image.png';
 import JsBarcode from 'jsbarcode';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function CustomerBookingHistory() {
-    var [bookings,setBookings]=useState([])
-  var userId=sessionStorage.getItem("userId")
-  
-  useState(() => {
+  var [bookings, setBookings] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [bookingsPerPage, setBookingsPerPage] = useState();
+  const userId = sessionStorage.getItem('userId');
+
+  useEffect(() => {
     fetch(`http://localhost:5256/api/users/GetBookingByCustomerId?customerId=${userId}`)
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
         setBookings(res);
-        const pastBookings = res.filter(a => new Date(a.booking.schedule.departure) < new Date());
-        setBookings(pastBookings)
       });
-  });
+  }, [userId]);
 
-  function getDate(date){
-    const formattedDate = date.toLocaleDateString(); 
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  // Update windowWidth state on window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Clean up event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+   // Update bookingsPerPage on window resize
+   useEffect(() => {
+    const handleResize = () => {
+      setBookingsPerPage(window.innerWidth <= 900 ? 1 : 4);
+    };
+
+    handleResize(); // Call initially to set bookingsPerPage
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  function getDate(date) {
+    const formattedDate = date.toLocaleDateString();
     const formattedTime = date.toLocaleTimeString();
     return { formattedDate, formattedTime };
   }
-  function getTimeDifference(departure,arrival){
+
+  function getTimeDifference(departure, arrival) {
     const arrivalTime = new Date(arrival);
     const departureTime = new Date(departure);
     const timeDifference = arrivalTime - departureTime;
 
     const hours = Math.floor(timeDifference / (1000 * 60 * 60));
     const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    return hours+":"+minutes+" hours"
+    return hours + ':' + minutes + ' hours';
   }
 
   const getAirlineImage = (airline) => {
     airline = airline.toLowerCase();
     switch (airline) {
-      case "indigo":
+      case 'indigo':
         return indigo;
-      case "air india":
+      case 'air india':
         return airIndia;
-      case "vistara":
+      case 'vistara':
         return vistara;
       default:
         return indigo;
@@ -54,18 +87,18 @@ export default function CustomerBookingHistory() {
 
   const downloadTicket = (booking) => {
     const doc = new jsPDF();
-    
+
     // Set background color
-    doc.setFillColor(244,229,215,255); // White background
+    doc.setFillColor(244, 229, 215, 255); // White background
 
     doc.addImage(boardingPassImage, 'JPEG', 0, 0, 210, 297);
-    
+
     // Ticket header
-   
+
     doc.setFontSize(16);
     doc.setTextColor(0); // Black text color
-    doc.text("Boarding Pass", 100, 25, null, null, 'center');
-    
+    doc.text('Boarding Pass', 100, 25, null, null, 'center');
+
     // Airline and flight details
     doc.setFontSize(12);
     doc.text(`Airline: ${booking.booking.schedule.flight.airline}`, 20, 55); // Position airline name before image
@@ -74,15 +107,27 @@ export default function CustomerBookingHistory() {
     doc.text(`Flight ID: ${booking.booking.schedule.flightId}`, 20, 65);
     doc.text(`From: ${booking.booking.schedule.route.sourceAirport.city}`, 20, 75);
     doc.text(`To: ${booking.booking.schedule.route.destinationAirport.city}`, 20, 85);
-    doc.text(`Departure: ${getDate(new Date(booking.booking.schedule.departure)).formattedDate} ${getDate(new Date(booking.booking.schedule.departure)).formattedTime}`, 20, 95);
-    doc.text(`Arrival: ${getDate(new Date(booking.booking.schedule.arrival)).formattedDate} ${getDate(new Date(booking.booking.schedule.arrival)).formattedTime}`, 20, 105);
+    doc.text(
+      `Departure: ${getDate(new Date(booking.booking.schedule.departure)).formattedDate} ${getDate(
+        new Date(booking.booking.schedule.departure)
+      ).formattedTime}`,
+      20,
+      95
+    );
+    doc.text(
+      `Arrival: ${getDate(new Date(booking.booking.schedule.arrival)).formattedDate} ${getDate(
+        new Date(booking.booking.schedule.arrival)
+      ).formattedTime}`,
+      20,
+      105
+    );
     doc.text(`Gate: ${Math.floor(Math.random() * 100)}`, 20, 115); // Random gate number
     doc.text(`Seat: ${booking.seatDetail.seatNumber} (${booking.seatDetail.seatClass})`, 20, 125);
-    
+
     // Passenger details
     doc.text(`Passenger: ${booking.passenger.name}`, 100, 55);
     doc.text(`Age: ${booking.passenger.age}`, 100, 65);
-    
+
     const barcodeValue = `${booking.booking.schedule.flightId}${booking.booking.bookingTime}`;
     const canvas = document.createElement('canvas');
     JsBarcode(canvas, barcodeValue, {
@@ -90,62 +135,97 @@ export default function CustomerBookingHistory() {
       displayValue: false,
       margin: 0,
       width: 1,
-      height: 40
+      height: 40,
     });
-  
+
     // Add barcode image to PDF
     const barcodeDataURL = canvas.toDataURL('image/jpeg');
     doc.addImage(barcodeDataURL, 'JPEG', 120, 85, 70, 30);
-    
+
     // Boarding pass details
     doc.setFontSize(8);
-    doc.text("This is your boarding pass. Please keep it safe and handy during your journey.", 100, 145, null, null, 'center');
-    
+    doc.text(
+      'This is your boarding pass. Please keep it safe and handy during your journey.',
+      100,
+      145,
+      null,
+      null,
+      'center'
+    );
+
     // Footer
     doc.setLineWidth(0.5);
     doc.line(10, 150, 200, 150);
     doc.setFontSize(10);
-    doc.text("Thank you for flying with us!", 100, 155, null, null, 'center');
-    
+    doc.text('Thank you for flying with us!', 100, 155, null, null, 'center');
+
     doc.save('boarding-pass.pdf');
   };
-    
+
+  const indexOfLastBooking = currentPage * bookingsPerPage;
+  const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
+  const currentBookings = bookings.slice(indexOfFirstBooking, indexOfLastBooking);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  console.log(bookingsPerPage, windowWidth);
+
+
   return (
-      <div className='bookings-div'>
+    <div className='bookings-div'>
       <div className='get-bookings-div'>
-        {bookings.map((booking, index) => (
-        <div key={index} className="booking-list-div">
-          <div className='booking-schedule-details'>
-           <div className="booking-flight-detail">
-            <img
-                src={getAirlineImage(booking.booking.schedule.flight.airline)}
-                className="airline-logo"
-              />
-            <p className="-bookingflight-details">{booking.booking.schedule.flight.airline}</p>
-            <p className="booking-flight-details">{booking.booking.schedule.flightId}</p>
-            </div>
-            <div className="flight-source">
-            <p className="flight-details">{booking.booking.schedule.route.sourceAirport.city}</p>
-            <p className="flight-details">{getDate(new Date(booking.booking.schedule.departure)).formattedTime}</p>
-            </div >
-            <p className="time-diff">{getTimeDifference(booking.booking.schedule.departure,booking.booking.schedule.arrival)}</p>
-            <div className="flight-destination">
-            <p className="flight-details">{booking.booking.schedule.route.destinationAirport.city}</p>
-            <p className="flight-details">{getDate(new Date(booking.booking.schedule.arrival)).formattedTime}</p>
-            </div>
-            <button className="download-ticket-button" onClick={() => downloadTicket(booking)}>Download Ticket</button>
-            </div>
-            <div className='date-seat-div'>
-              <div>Departure Date : <b>{getDate(new Date(booking.booking.schedule.departure)).formattedDate}</b></div>
-              <div>Seat : <b>{booking.seatDetail.seatNumber} ({booking.seatDetail.seatClass})</b></div>
-            </div>
-            <div className='booking-passenger-details'>
-                <div>Passenger name : <b>{booking.passenger.name}</b></div>
-                <div>Age : <b>{booking.passenger.age}</b></div>
-                <div>Booking Date : <b>{getDate(new Date(booking.booking.bookingTime)).formattedDate}</b></div>
-            </div>
-        </div>))}
+        {currentBookings.map((booking, index) => (
+          <div key={index} className='booking-list-div'>
+            <div className='booking-schedule-details'>
+              <div className='booking-flight-detail'>
+                <img src={getAirlineImage(booking.booking.schedule.flight.airline)} className='airline-logo' />
+                <p className='-bookingflight-details'>{booking.booking.schedule.flight.airline}</p>
+                <p className='booking-flight-details'>{booking.booking.schedule.flightId}</p>
+              </div>
+              <div className='flight-source'>
+                <p className='flight-details'>{booking.booking.schedule.route.sourceAirport.city}</p>
+                <p className='flight-details'>{getDate(new Date(booking.booking.schedule.departure)).formattedTime}</p>
+              </div>
+              <p className='time-diff'>{getTimeDifference(booking.booking.schedule.departure, booking.booking.schedule.arrival)}</p>
+              <div className='flight-destination'>
+                <p className='flight-details'>{booking.booking.schedule.route.destinationAirport.city}</p>
+                <p className='flight-details'>{getDate(new Date(booking.booking.schedule.arrival)).formattedTime}</p>
+              </div>
+              <button className='download-ticket-button' onClick={() => downloadTicket(booking)}>
+                Download Ticket
+                </button>
+        </div>
+        <div className='date-seat-div'>
+          <div>
+            Departure Date : <b>{getDate(new Date(booking.booking.schedule.departure)).formattedDate}</b>
+          </div>
+          <div>
+            Seat : <b>
+              {booking.seatDetail.seatNumber} ({booking.seatDetail.seatClass})
+            </b>
+          </div>
+        </div>
+        <div className='booking-passenger-details'>
+          <div>
+            Passenger name : <b>{booking.passenger.name}</b>
+          </div>
+          <div>
+            Age : <b>{booking.passenger.age}</b>
+          </div>
+          <div>
+            Booking Date : <b>{getDate(new Date(booking.booking.bookingTime)).formattedDate}</b>
+          </div>
+        </div>
       </div>
-    </div>
-  )
+    ))}
+  </div>
+  <div className='pagination'>
+    <button onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
+      Prev
+    </button>
+    <button onClick={() => paginate(currentPage + 1)} disabled={indexOfLastBooking >= bookings.length}>
+      Next
+    </button>
+  </div>
+</div>
+  );
 }

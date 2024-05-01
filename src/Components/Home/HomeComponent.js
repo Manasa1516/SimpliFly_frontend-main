@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import SearchedFlightResult from "../SearchedFlightResult/SearchedFlightResult";
 import Services from "../Offers/Services";
 import AboutPage from "../AboutPage/AboutPage";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function HomeComponent() {
   const [isRoundtrip, setIsRoundtrip] = useState(false);
@@ -82,7 +84,7 @@ export default function HomeComponent() {
       .then((res) => {
         console.log(res);
         if (res.length === 0) {
-          alert("No flights available");
+          toast("No flights available");
           return;
         } else {
           dispatch(addSearchFlightResult({ searchFlightResult: res }));
@@ -228,6 +230,7 @@ export default function HomeComponent() {
       <Services />
       <AboutPage />
       <Footer />
+      <ToastContainer/>
     </div>
   );
 }

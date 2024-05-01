@@ -4,6 +4,8 @@ import userimg from '../../Assets/Images/user.png'
 import keyimg from '../../Assets/Images/key.png'
 import RegisteredSuccessfully from "../RegisteredSuccessfullyMsg/RegisteredSuccessfully";
 import Registeruserimg from "./Images/image.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function RegisterFlightOwner() {

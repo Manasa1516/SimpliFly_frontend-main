@@ -66,3 +66,61 @@
   color: #5444dc;
 }
 
+@media (max-width: 768px) {
+  .update-flight-div {
+    margin-top: 180px;
+    margin-left: -300px;
+    height: 300px;
+    padding: 10px;
+  }
+
+  .update-options-div {
+    flex-direction: column;
+  }
+
+  .update-seats-btn {
+    height: 40px;
+    margin: 10px 0;
+    margin-top: -5px;
+  }
+
+  .update-div {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .update-seats,
+  .update-status {
+    width: 50%;
+    height:fit-content;
+  }
+
+  .flight-number{
+    margin-left: -60px;
+    width: 120%;
+    margin-bottom: 10px;
+  }
+  .seats-input-div seats{
+    margin-left: -60px;
+    margin-bottom: 10px;
+  }
+  .status-input-div {
+    margin-left: -60px;
+    width: 120%;
+    margin-bottom: 10px;
+  }
+
+  .select-destination-airport,
+  input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 5px;
+  }
+
+  .update-flight-btn {
+    height:fit-content;
+    width: fit-content;
+    padding: 10px;
+    margin-top: 10px;
+    margin-right: 90px;
+  }
+}

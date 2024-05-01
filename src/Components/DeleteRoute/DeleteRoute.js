@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import './DeleteRoute.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function DeleteRoute() {
     var [sourceAirport, setSourceAirport] = useState();
@@ -9,9 +11,8 @@ export default function DeleteRoute() {
 
   var DeleteFlightRoute=(e)=>{
     e.preventDefault();
-
     if (!sourceAirport || sourceAirport === "0" || !destinationAirport || destinationAirport === "0") {
-      document.getElementById('error-message').innerText = 'Please select both source and destination airports.';
+      toast("Please select both source and destination airports.");
       return;
     }
     const confirmDelete = window.confirm(`Are you sure you want to remove the route?`);
@@ -35,11 +36,11 @@ export default function DeleteRoute() {
       .then(res => res.json())
       .then(res => {
         console.log('Response:', res);
-        alert('Route deleted successfully');
+        toast('Route deleted successfully');
       })
       .catch(err => {
         console.error('Error:', err);
-        alert('No Such Route Present');
+        toast('No Such Route Present');
       });
     }
     
@@ -95,6 +96,7 @@ export default function DeleteRoute() {
         Remove Route
       </button>
       <div id="error-msg" className="error-msg"></div>
+      <ToastContainer/>
     </div>
   )
 }

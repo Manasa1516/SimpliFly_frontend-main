@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './GetFlightOwner.css'
 import axios from 'axios'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function GetFlightOwner() {
     var [flightOwner,setFlightOwner]=useState([])
@@ -34,7 +36,7 @@ export default function GetFlightOwner() {
           .then((res)=>res.json)
           .then((res)=>{console.log(res)})
           .catch((err) => {
-            alert("Something went wrong");
+            toast("Something went wrong");
           });
         }        
       }

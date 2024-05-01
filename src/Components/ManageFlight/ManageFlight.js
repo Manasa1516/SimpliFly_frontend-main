@@ -11,7 +11,6 @@ import useronline from "./Images/useronline.png";
 import mybooking from "./Images/Mybooking.png";
 
 
-
 export default function ManageFlight() {
   const [addFlight,setAddFlight]=useState(true)
   const [getFlight,setGetFlight]=useState(false)
@@ -77,7 +76,7 @@ export default function ManageFlight() {
         </div>
         </div>
         <div className="container-main" id='container-main'>
-        <div className="more-profile-option"><img src={rightArrow} className="right-arrow" onClick={DisplayOptions}/></div>
+        <div className="more-profile-option" style={{marginTop: '-150%'}}><img src={rightArrow} className="right-arrow" onClick={DisplayOptions}/></div>
             {addFlight && <div className="add-flight">
                 <AddFlight/>
             </div>}

@@ -4,6 +4,8 @@ import axios from "axios";
 import indigo from "../../Assets/Images/indigo.png";
 import airIndia from "../../Assets/Images/airindia.png";
 import vistara from "../../Assets/Images/vistara.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function GetCancelBookings() {
   var [bookings, setBooking] = useState([]);

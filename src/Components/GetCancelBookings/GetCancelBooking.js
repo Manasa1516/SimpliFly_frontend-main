@@ -4,6 +4,8 @@ import axios from "axios";
 import indigo from "../../Assets/Images/indigo.png";
 import airIndia from "../../Assets/Images/airindia.png";
 import vistara from "../../Assets/Images/vistara.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function GetCancelBookings() {
   var [bookings, setBooking] = useState([]);
@@ -106,7 +108,7 @@ export default function GetCancelBookings() {
       )
       .then(function (response) {
         console.log(response.data);
-        alert("Refund status update successful");
+        toast("Refund status updated successfully");
         // Refresh the bookings list
         axios
           .get(
@@ -124,13 +126,14 @@ export default function GetCancelBookings() {
       })
       .catch(function (error) {
         console.error("Error:", error);
-        alert("Error updating refund status.");
+        toast("Error updating refund status.");
       });
   };
 
-  const indexOfLastBooking = currentPage * bookingsPerPage;
-  const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
-  const currentBookings = bookings.slice(indexOfFirstBooking, indexOfLastBooking);
+  const filteredBookings = bookings.filter(cb => cb.booking.schedule.flight.flightOwnerOwnerId == userId);
+const indexOfLastBooking = currentPage * bookingsPerPage;
+const indexOfFirstBooking = indexOfLastBooking - bookingsPerPage;
+const currentBookings = filteredBookings.slice(indexOfFirstBooking, indexOfLastBooking);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -177,15 +180,16 @@ export default function GetCancelBookings() {
                 </p>
               </div>
               <div className="refund-status-container">
-  <select
-    className="refund-status-select"
-    value={booking.refundStatus}
-    onChange={(e) => handleRefundStatusUpdate(booking.id, e.target.value)}
-  >
-    <option value="Refund Issued">Refund Issued</option>
-    <option value="Refund Declined">Refund Declined</option>
-  </select>
-</div>
+                <select
+                  className="refund-status-select"
+                  value={booking.refundStatus}
+                  onChange={(e) => handleRefundStatusUpdate(booking.id, e.target.value)}
+                >
+                  <option value="0">  --Select--  </option>
+                  <option value="Refund Issued">Refund Issued</option>
+                  <option value="Refund Declined">Refund Declined</option>
+                </select>
+              </div>
 
             </div>
             <div className="booking-passenger-details">
@@ -203,14 +207,21 @@ export default function GetCancelBookings() {
           </div>
         ))}
         <div className='pagination'>
-          {bookings.length > bookingsPerPage && (
-            <button onClick={() => paginate(currentPage - 1)}>Previous</button>
-          )}
-          {bookings.length > indexOfLastBooking && (
-            <button onClick={() => paginate(currentPage + 1)}>Next</button>
-          )}
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={indexOfLastBooking >= bookings.length}
+          >
+            Next
+          </button>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

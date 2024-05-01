@@ -4,6 +4,8 @@ import userimg from '../../Assets/Images/user.png'
 import keyimg from '../../Assets/Images/key.png'
 import RegisteredSuccessfully from "../RegisteredSuccessfullyMsg/RegisteredSuccessfully";
 import Registeruserimg from "./Images/image.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function RegisterUser() {
     const [displayUsernamePasswordDiv, setDisplayUsernamePassword] = useState(true);
@@ -143,7 +145,7 @@ var RequestOption ={
           setRegisterMessage(true)
         })
         .catch(err=>{console.log(err)
-          alert("User already present")})
+          toast("User already present")})
     }
   }
   function DisplayUsernamePassword() {
@@ -236,6 +238,7 @@ var RequestOption ={
         </div>
       {registerMessage && <RegisteredSuccessfully className="register-successfully-div"/>}
       </div>
+      <ToastContainer/>
     </div>
   )
 }

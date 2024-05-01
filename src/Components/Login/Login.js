@@ -4,6 +4,8 @@ import userImg from "../../Assets/Images/user.png";
 import key from "../../Assets/Images/key.png";
 import { Link, useNavigate } from "react-router-dom";
 import loginImage from "./Images/image.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -72,7 +74,7 @@ else {
         sessionStorage.setItem("token", res.token);
         sessionStorage.setItem("username", res.username);
         sessionStorage.setItem("role", res.role);
-        alert("Login success - " + res.username);
+        toast("Login success - " + res.username)
 
         if (sessionStorage.getItem("role") == "flightOwner") {
           var getRequestOptions = {
@@ -193,6 +195,7 @@ else {
           </form>
         </div>
       </div>
+      <ToastContainer/>
     </div>
   );
 }

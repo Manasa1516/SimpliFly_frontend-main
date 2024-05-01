@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import "./DeleteSchedule.css";
 import axios from "axios";
 import { json } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function DeleteSchedule() {
   const currentDateTime = new Date().toISOString();
   var [airlineScheduleDelete, setAirlineScheduleDelete] = useState(true);
   var [dateScheduleDelete, setDateScheduleDelete] = useState(false);
+  const flightOwnerId = sessionStorage.getItem("ownerId");
+
 
   var [flightNumber, setFlightNumber] = useState();
   var [airport, setAirport] = useState();
@@ -22,7 +26,7 @@ export default function DeleteSchedule() {
       headers: { Authorization: "Bearer " + token },
     };
     axios
-      .get("http://localhost:5256/api/Flight", httpHeader)
+      .get(`http://localhost:5256/api/Flight/GetAllFlights/flightOwnerId?flightOwnerId=${flightOwnerId}`, httpHeader)
       .then(function (response) {
         setFlights(response.data);
         console.log(response.data);
@@ -33,6 +37,10 @@ export default function DeleteSchedule() {
   }, []);
 
   var DeleteFligtSchedule = (e) => {
+    if (!flightNumber || flightNumber === "0") {
+      toast("Select a flight number to delete the schedule");
+      return;
+    }
     const confirmDelete = window.confirm(`Are you sure you want to remove the schedule?`);
         if(confirmDelete){
           e.preventDefault();
@@ -57,11 +65,11 @@ export default function DeleteSchedule() {
             .then((res) => res.json())
             .then((res) => {
               console.log(res);
-              alert("Schedule deleted successfully");
+              toast("Schedule deleted successfully");
             })
             .catch((err) => {
               console.error("Error:", err);
-              alert("Error deleting Schedule.");
+              toast("Error deleting Schedule.");
             });
         }
     
@@ -90,11 +98,11 @@ export default function DeleteSchedule() {
             .then((res) => res.json())
             .then((res) => {
               console.log(res);
-              alert("Schedule deleted successfully");
+              toast("Schedule deleted successfully");
             })
             .catch((err) => {
               console.error("Error:", err);
-              alert("Error deleting Schedule.");
+              toast("Error deleting Schedule.");
             });
         }   
     
@@ -124,15 +132,6 @@ export default function DeleteSchedule() {
           }}
         >
           Delete Flight Schedule
-        </div>
-        <div
-          className="delete-dateschedule-btn"
-          onClick={() => {
-            setAirlineScheduleDelete(false);
-            setDateScheduleDelete(true);
-          }}
-        >
-          Delete Schedule by Date
         </div>
       </div>
       <div className="delete-schedule-div">
@@ -167,49 +166,8 @@ export default function DeleteSchedule() {
               </button>
             </form>
           </div>
-        )}
-        {dateScheduleDelete && (
-          <div className="delete-date-schedule">
-            <form>
-              <div className="date-div">
-                <label htmlFor="departure-time">
-                  <b>Departure Date : </b>
-                </label>
-                <input
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  min={currentDateTime}
-                />
-              </div>
-
-              <div className="destination-airport-div airport-select-div">
-                <label htmlFor="destination-airport">
-                  <b>Airport : </b>
-                </label>
-                <select
-                  className="select-destination-airport"
-                  onChange={(e) => setAirport(e.target.value)}
-                >
-                  <option value="0">--Select airport--</option>
-                  {airports.map((airport) => (
-                    <option key={airport.id} value={airport.id}>
-                      {airport.city}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <button
-                type="button"
-                className="delete-date-schedule-btn"
-                onClick={DeleteDateSchedule}
-              >
-                Delete Schedule
-              </button>
-            </form>
-          </div>
-        )}
-      </div>
+        )}      </div>
+      <ToastContainer/>
     </div>
   );
 }

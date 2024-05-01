@@ -5,6 +5,8 @@ import indigo from "../../Assets/Images/indigo.png";
 import airIndia from "../../Assets/Images/airindia.png";
 import vistara from "../../Assets/Images/vistara.png";
 import editIcon from "../../Assets/Images/edit-icon.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function UpdateSchedule() {
   const [flights, setFlights] = useState([]);
@@ -90,7 +92,7 @@ export default function UpdateSchedule() {
 
   function UpdateScheduleFlight() {
     if (!flightNumber) {
-      alert('Select Flight');
+      toast('Select Flight');
       return;
     }
     var updateDetails = {};
@@ -109,7 +111,7 @@ export default function UpdateSchedule() {
       .then((res) => res.json)
       .then((res) => {
         console.log(res);
-        alert('Updated flight for the Schedule');
+        toast('Updated flight for the Schedule');
       })
       .catch((err) => {
         console.log(err);
@@ -118,7 +120,7 @@ export default function UpdateSchedule() {
 
   function UpdateScheduleDate() {
     if (departureTime == arrivalTime) {
-      alert('Departure and arrival time cannot be same');
+      toast('Departure and arrival time cannot be same');
       return;
     }
     var updateDetails = {};
@@ -138,7 +140,7 @@ export default function UpdateSchedule() {
       .then((res) => res.json)
       .then((res) => {
         console.log(res);
-        alert('Updated Time for the Schedule');
+        toast('Updated Time for the Schedule');
       })
       .catch((err) => {
         console.log(err);
@@ -288,6 +290,7 @@ export default function UpdateSchedule() {
           )}
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 }

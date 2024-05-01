@@ -67,23 +67,19 @@
 @media (max-width: 900px) {
     #manage-flight-sidebar{
         display: flex;
-        width: 100%;
+        width: 200%;
+        margin-left: 50%;
     }
     .get-flight,.add-flight,.update-flight,.delete-flight{
         width: 100%;
     }
-    
-}
-@media (max-width: 768px) {
     .container-main {
-        width: 90%;
-        margin-top: 10%;
-    }
-}
-
-@media (max-width: 480px) {
-    .container-main {
-        width: 100%;
+        width: 300px;
         margin-top: 5%;
     }
+    .more-profile-option{
+        margin-bottom: 30%;
+    }
+    
 }
+

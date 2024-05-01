@@ -4,6 +4,8 @@ import axios from "axios";
 import indigo from "../../Assets/Images/indigo.png";
 import airIndia from "../../Assets/Images/airindia.png";
 import vistara from "../../Assets/Images/vistara.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function GetBookings() {
   var [bookings, setBooking] = useState([]);
@@ -84,9 +86,9 @@ export default function GetBookings() {
     }
     fetch(`http://localhost:5256/api/users/${userId}/bookings/${bookingId}`,RequestOptions)
       .then(res=>res.json)
-      .then(alert("Booking deleted successfully"))
+      .then(toast("Booking cancelled successfully"))
       .catch((err)=>{
-        alert(err)
+        toast(err)
       })
   }
 
@@ -170,14 +172,22 @@ export default function GetBookings() {
           </div>
         ))}
         <div className='pagination'>
-          {bookings.length > bookingsPerPage && (
-            <button onClick={() => paginate(currentPage - 1)}>Previous</button>
-          )}
-          {bookings.length > indexOfLastBooking && (
-            <button onClick={() => paginate(currentPage + 1)}>Next</button>
-          )}
+        <button
+    onClick={() => paginate(currentPage - 1)}
+    disabled={currentPage === 1}
+  >
+    Previous
+  </button>
+  <button
+    onClick={() => paginate(currentPage + 1)}
+    disabled={indexOfLastBooking >= bookings.length}
+  >
+    Next
+  </button>
         </div>
+        
       </div>
+      <ToastContainer/>
     </div>
   );
 }

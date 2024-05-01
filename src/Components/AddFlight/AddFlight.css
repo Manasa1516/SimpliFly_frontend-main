@@ -32,7 +32,8 @@
   /* Responsive styles */
   @media (max-width: 900px) {
     .add-flight-div {
-        margin-top: 100px;
+        margin-top: 250px;
+        margin-bottom: 0px;
         margin-left: -300px;
       width: 100%;
     }
@@ -48,64 +49,4 @@
         font-size: 10px;
     }
   }
-  @media (max-width: 900px) {
-    #manage-flight-sidebar{
-        display: none;
-        width: 100%;
-    }
-    .get-flight,.add-flight,.update-flight,.delete-flight{
-        width: 100%;
-    }
-
-    .account-sidebar{
-        width: 120% !important;
-        margin-left: 30% !important;
-    }
-
-    .sidebar-container{
-       width: 120% !important;
-    }
-
-    .add-flight-div{
-        margin-left: -75% !important;
-        width: 20%;
-    }
-    .delete-flight-div{
-        margin-left: -75% !important;
-        width: 90% !important;
-    }
-    .update-flight-div{
-        margin-left: -75% !important;
-        width: 100% !important;
-        gap: 20px !important;
-    }
-    .get-flight-div{
-        margin-left: -75% !important;
-        width: 105% !important;
-        height: auto !important;
-    }
-    .flightnumber-input-div label,
-    .seats-input-div label,
-    .status-input-div label,
-    .airline-input-div label {
-        margin-left: -11% !important; 
-        display: block; /* Display labels as block elements */
-        text-align: left; /* Align text to the left */
-  }
-
-  .flightnumber-input-div select,
-  .status-input-div  select,
-  .airline-input-div input,
-  .seats-input-div input[type='number'] {
-    /* Styles for inputs */
-    width: 100%; /* Make inputs fill the available width */
-    margin-right: -17% !important;  
-    margin-top: 5px !important;
-  }
-
-  .status-input-div label{
-    margin-top: 10% !important;
-  }
-    
-}
   

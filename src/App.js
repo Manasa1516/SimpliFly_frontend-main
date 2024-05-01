@@ -25,6 +25,7 @@ import UserAccount from "./Components/UserAccount/UserAccount";
 import CustomerBookingHistory from "./Components/CustomerBookings/CustomerBookingHistory";
 import ManageBooking from "./Components/ManageBookings/ManageBooking";
 import UpdatePassword from "./Components/UpdatePassword/UpdatePassword";
+import CustomerBooking from "./Components/GetBookings/GetBookings";
 
 function App() {
   return (

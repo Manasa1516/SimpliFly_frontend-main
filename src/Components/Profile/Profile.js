@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import backImg from "./Images/image.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Profile() {
   var [user, setUser] = useState({});
@@ -99,11 +101,11 @@ console.log(flightOwner);
             .then(res=>res.json())
             .then(res=>{
                 console.log(res);
-                alert('Profile updated successfully');
+                toast('Profile updated successfully');
             })
             .catch(err => {
                 console.error('Error:', err);
-                alert('Error updating profile.');
+                toast('Error updating profile.');
               });
     }
     
@@ -127,11 +129,11 @@ fetch("http://localhost:5256/api/users/UpdateUser",RequestOption)
     .then(res=>res.json())
     .then(res=>{
         console.log(res);
-        alert('Profile updated successfully');
+        toast('Profile updated successfully');
     })
     .catch(err => {
         console.error('Error:', err);
-        alert('Error updating profile.');
+        toast('Error updating profile.');
       });
 
     }
@@ -156,11 +158,11 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
     .then(res=>res.json())
     .then(res=>{
         console.log(res);
-        alert('Profile updated successfully');
+        toast('Profile updated successfully');
     })
     .catch(err => {
         console.error('Error:', err);
-        alert('Error updating profile.');
+        toast('Error updating profile.');
       });
     }
   }
@@ -259,6 +261,7 @@ fetch("http://localhost:5256/api/admin/dashboard",RequestOption)
             </div>
           </div>
         </div>
+        <ToastContainer/>
     </div>
   );
 }

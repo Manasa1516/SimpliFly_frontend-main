@@ -5,6 +5,7 @@ import airIndia from "../../Assets/Images/airindia.png";
 import vistara from "../../Assets/Images/vistara.png";
 import "./GetFlight.css";
 
+
 export default function GetFlight() {
   const [flights, setFlights] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

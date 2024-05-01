@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./UpdateFlight.css";
 import axios from "axios";
 import { width } from "@fortawesome/free-brands-svg-icons/fa42Group";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function UpdateFlight() {
   const [updateAirline,setUpdateAirline]=useState(true)
@@ -36,8 +38,8 @@ export default function UpdateFlight() {
   var [isFilledAll, setIsFilledAll] = useState(false);
 
   function validateSeat(noOfSeats) {
-    if (noOfSeats <= 0 || noOfSeats > 120) {
-      setSeatError("Total Seats can't be negative and greater than 120");
+    if (noOfSeats <= 30 || noOfSeats > 120) {
+      setSeatError("Total Seats must range between 30-120");
       return false;
     }
     else {
@@ -67,7 +69,7 @@ export default function UpdateFlight() {
 
     var UpdateFlightAirline=(e)=>{
       if(!flightNumber || !airline){
-        alert("Please enter the required details")
+        toast("Please enter the required details")
         return
       }
         e.preventDefault();
@@ -88,11 +90,11 @@ export default function UpdateFlight() {
             .then(res=>res.json())
             .then(res=>{
                 console.log(res);
-                alert('Flight airline update successfully');
+                toast('Flight airline update successfully');
             })
             .catch(err => {
                 console.error('Error:', err);
-                alert('Error updating flight.');
+                toast('Error updating flight.');
               });
     }
 
@@ -102,7 +104,7 @@ export default function UpdateFlight() {
         return;
       }
       else if (!validateSeat(seats)) {
-        setSeatError("Total Seats can't be negative and greater than 120");
+        toast("Total Seats must range between 30-120");
         return;
       }
 
@@ -125,17 +127,21 @@ export default function UpdateFlight() {
             .then(res=>res.json())
             .then(res=>{
                 console.log(res);
-                alert('Flight seats update successfully');
+                toast('Flight seats update successfully');
             })
             .catch(err => {
                 console.error('Error:', err);
-                alert('Error updating flight.');
+                toast('Error updating flight.');
               });
     }
     var UpdateFlightStatus=(e)=>{
       if(!flightNumber || !status){
-        alert("Please enter the required details")
+        toast("Please enter the required details")
         return
+      }
+      if (status !== "0" && status !== "1") {
+        toast("Status can only be 0 or 1");
+        return;
       }
         e.preventDefault();
         updateStatusDetail.flightNumber=flightNumber;
@@ -154,11 +160,11 @@ export default function UpdateFlight() {
             .then(res=>res.json())
             .then(res=>{
                 console.log(res);
-                alert('Flight status update successfully');
+                toast('Flight status update successfully');
             })
             .catch(err => {
                 console.error('Error:', err);
-                alert('Error updating flight status.');
+                toast('Error updating flight status.');
               });
     }
   return (
@@ -196,10 +202,8 @@ export default function UpdateFlight() {
                         <label htmlFor="seats"style={{ marginLeft: '150px' }}><b>Seats :</b> </label>
                         <input type="number" placeholder="Enter Seats" value={seats} onChange={(e) => { setSeats(e.target.value); validateSeat(e.target.value) }} />
                         </div>
-                        <span style={{ color: 'red' }}>{seatError}</span>
-
                     <button type='button' className='update-flight-btn' onClick={UpdateFlightSeats}>Update Flight</button>
-                    {isFilledAll ? <span style={{ color: 'red' }}>{formError}</span> : ""}
+                    {isFilledAll ? <span style={{ color: 'red',fontSize:'17px',marginLeft:'220px' }}>{formError}</span> : ""}
 
                 </form>
             </div>}
@@ -227,6 +231,7 @@ export default function UpdateFlight() {
                 </form>
             </div>}
           </div>
+          <ToastContainer/>
       </div>
   );
 }

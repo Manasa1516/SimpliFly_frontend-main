@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "./AddSchedule.css";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AddSchedule() {
   const currentDate = new Date();
@@ -15,6 +17,8 @@ export default function AddSchedule() {
   var [routeId, setRouteId] = useState();
   var [airports, setAirports] = useState([]);
   var addScheduleDetails = {};
+  const flightOwnerId = sessionStorage.getItem("ownerId");
+
 
   var [flights, setFlights] = useState([]);
 
@@ -24,7 +28,7 @@ export default function AddSchedule() {
       headers: { Authorization: "Bearer " + token },
     };
     axios
-      .get("http://localhost:5256/api/Flight", httpHeader)
+      .get(`http://localhost:5256/api/Flight/GetAllFlights/flightOwnerId?flightOwnerId=${flightOwnerId}`, httpHeader)
       .then(function (response) {
         setFlights(response.data);
         console.log(response.data);
@@ -36,11 +40,11 @@ export default function AddSchedule() {
 
   var AddNewSchedule = (e) => {
     if (flightNumber === "0") {
-      alert("Select flight number");
+      toast("Select flight number");
       return;
     }
     if (departureTime === arrivalTime) {
-      alert("departure and arrival time cannot be same");
+      toast("departure and arrival time cannot be same");
       return;
     }
     e.preventDefault();
@@ -85,15 +89,15 @@ export default function AddSchedule() {
           .then((res) => res.json())
           .then((res) => {
             console.log("Response:", res);
-            alert("Schedule added successfully");
+            toast("Schedule added successfully");
           })
           .catch((err) => {
             console.error("Error:", err);
-            alert("Error adding schedule.");
+            toast("Error adding schedule.");
           });
       })
       .catch((err) => {
-        alert("No route found for this cities, add route first.")
+        toast("No route found for this cities, add route first.")
       });
   };
 
@@ -206,6 +210,7 @@ export default function AddSchedule() {
       >
         Add Schedule
       </button>
+      <ToastContainer/>
     </div>
   );
 }

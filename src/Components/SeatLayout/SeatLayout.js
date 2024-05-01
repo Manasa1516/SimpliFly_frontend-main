@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from "react";
 import "./SeatLayout.css";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import BookingDetails from "../BookingDetails/BookingDetails";
 import paymentsImg from "./Images/image.png";
 import planelayout from "./Images/planelayout.png";
 import seatlayout from "./Images/seatlayout.png";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useHistory } from 'react-router-dom';
+
 
 export default function SeatLayout() {
   const [seats, setSeats] = useState([]);
   const [bookedSeats, setBookedSeats] = useState([]);
+  var navigate = useNavigate();
   var [cardNumber, setCardNumber] = useState();
   var [cvv, setCvv] = useState();
   var [expiry, setExpiry] = useState();
+  const [seatsSelected, setSeatsSelected] = useState(false); // Define seatsSelected state
 
   // changed here
   const [cardNumberError, setcardNumberError] = useState('');
   const [expiryError, setExpiryError] = useState('');
   const [cvvError, setcvvError] = useState('');
   const [formError, setFormError] = useState('');
-  //praneeth kumar
   const validatecardNumber = (cardnumber) => {
    if(!cardnumber)
    {
@@ -84,10 +90,11 @@ export default function SeatLayout() {
         return;
       } else {
         if(selectedSeatNumbers.length+1>passengersIds.length){
-          alert(`You can select only ${passengerIds.length} seats.`)
+          toast(`You can select only ${passengerIds.length} seats.`)
           return
         }
         setSelectedSeatNumbers([...selectedSeatNumbers, seatNumber]);
+        setSeatsSelected(true); // Update seatsSelected state
       }
     }
     console.log(selectedSeatNumbers);
@@ -186,7 +193,7 @@ export default function SeatLayout() {
         .then((res) => res.json())
         .then((res) => {
           console.log("Response:", res);
-          alert("Booking added successfully");
+          toast("Booking added successfully");
         })
         .catch((err) => {
           console.error("Error:", err);
@@ -225,9 +232,12 @@ export default function SeatLayout() {
             ))}
           </div>
         </div>
-        <button onClick={Payments} className="pay-btn">
+        <button onClick={Payments} className="pay-btn" disabled={!seatsSelected || selectedSeatNumbers.length !== passengerIds.length}>
           Make Payment
         </button>
+        {selectedSeatNumbers.length === 0 && (
+          <p style={{ color: 'red', marginTop: '10px', marginLeft: '-250px' }}>Select seats to proceed with payment</p>
+        )}
       </div>
       {payments && (
         <div className="payments">
@@ -290,6 +300,7 @@ export default function SeatLayout() {
           </div>
         </div>
       )}
+      <ToastContainer/>
     </div>
   );
 }

@@ -7,6 +7,8 @@ import vistara from "../../Assets/Images/vistara.png";
 import { useNavigate } from "react-router-dom";
 import { addPassenger } from "../../PassengerSlice";
 import Footer from "../Footer/Footer";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function BookingDetails() {
   var selectedFlight = useSelector((state) => state.selectedFlight);
@@ -102,7 +104,7 @@ export default function BookingDetails() {
   function AddPassenger() {
     var totalAddedPassengers = passengers.length;
     if (totalAddedPassengers >= totalPassengers) {
-      alert("You can add only " + totalPassengers + " passengers");
+      toast("You can add only " + totalPassengers + " passengers");
       return;
     }
     if (validatename(name) && validateage(age) && validatePassword(passportNumber)){
@@ -118,7 +120,7 @@ export default function BookingDetails() {
       (passenger) => passenger.passportNumber === passportNumber
     );
     if (isDuplicate) {
-      alert("Passenger with same passport number already added");
+      toast("Passenger with same passport number already added");
       return;
     }
     var passenger = {
@@ -156,7 +158,7 @@ export default function BookingDetails() {
   function BookSeats() {
     var totalAddedPassengers = passengers.length;
     if (totalAddedPassengers < totalPassengers) {
-      alert(`Add ${totalPassengers-totalAddedPassengers} more passengers`);
+      toast(`Add ${totalPassengers-totalAddedPassengers} more passengers`);
       return;
     }
     const fetchPromises = passengers.map((passenger) => {
@@ -176,7 +178,7 @@ export default function BookingDetails() {
           return res.passengerId;
         })
         .catch((err) => {
-          alert("Error adding passenger.");
+          toast("Error adding passenger.");
         });
     });
 
@@ -317,6 +319,7 @@ export default function BookingDetails() {
       <button onClick={BookSeats} className="book-seats-btn">
         Book Seats
       </button>
+      <ToastContainer/>
     </div>
   );
 }

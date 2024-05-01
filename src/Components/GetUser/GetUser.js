@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import './GetUser.css'
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function GetUser() {
   const [users, setUsers] = useState([]);
@@ -36,7 +38,7 @@ export default function GetUser() {
         .then((res) => res.json())
         .then((res) => { console.log(res) })
         .catch((err) => {
-          alert("Something went wrong");
+          toast("Something went wrong");
         });
     }
   }
@@ -66,6 +68,7 @@ export default function GetUser() {
           </>
         )}
       </div>
+      <ToastContainer/>
     </div>
   )
 }

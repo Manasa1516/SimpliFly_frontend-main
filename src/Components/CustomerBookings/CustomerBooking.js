@@ -6,6 +6,8 @@ import vistara from "../../Assets/Images/vistara.png";
 import jsPDF from 'jspdf';
 import boardingPassImage from "./Images/image.png";
 import JsBarcode from 'jsbarcode';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function CustomerBooking() {
@@ -89,11 +91,11 @@ export default function CustomerBooking() {
         .then(res => res.json())
         .then(res => {
           console.log(res);
-          alert('Booking cancelled successfully');
+          toast('Booking cancelled successfully');
         })
         .catch(err => {
           console.error('Error:', err);
-          alert('Error canceling booking.');
+          toast('Error canceling booking.');
         });
 
     }
@@ -225,6 +227,7 @@ export default function CustomerBooking() {
                )}
             </div>
       </div>
+      <ToastContainer/>
     </div>
   )
 }
