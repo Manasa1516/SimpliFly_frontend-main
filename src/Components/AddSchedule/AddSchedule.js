@@ -97,7 +97,7 @@ export default function AddSchedule() {
           });
       })
       .catch((err) => {
-        toast("No route found for this cities, add route first.")
+        toast("No route found for these cities, add route first :).")
       });
   };
 

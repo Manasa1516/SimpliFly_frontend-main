@@ -20,7 +20,8 @@ export default function CustomerBookingHistory() {
       .then((res) => res.json())
       .then((res) => {
         console.log(res);
-        setBookings(res);
+        const filteredBookings = res.filter(booking => new Date(booking.booking.schedule.departure) < new Date());
+        setBookings(filteredBookings);
       });
   }, [userId]);
 

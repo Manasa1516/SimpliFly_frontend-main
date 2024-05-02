@@ -31,11 +31,11 @@ export default function AddFlight() {
       return;
     }
     if (parseInt(totalSeats) < 30 || parseInt(totalSeats) > 120) {
-      toast('Total seats must be between 30 and 120');
+      toast('Total seats must range between 30 and 120');
       return;
     }
     if (parseFloat(basePrice) <= 3000) {
-      toast('Base price must be greater than 3000');
+      toast('Base price should be greater than 3000');
       return;
     }
     e.preventDefault();

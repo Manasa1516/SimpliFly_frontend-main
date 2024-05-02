@@ -15,8 +15,8 @@ import cancelledbookingImg from "./Images/cancelledbooking.png";
 
 
 export default function UserAccount() {
-  var [profile, setProfile] = useState(true);
-  var [bookings, setBookings] = useState(false);
+  var [profile, setProfile] = useState(false);
+  var [bookings, setBookings] = useState(true);
   var [bookingsHistory, setBookingHistory] = useState(false);
   var [cancelledBookings, setCancelledBookings] = useState(false); // Add state for CancelledBookings
 

@@ -193,8 +193,10 @@ export default function SeatLayout() {
         .then((res) => res.json())
         .then((res) => {
           console.log("Response:", res);
-          toast("Booking added successfully");
-        })
+          toast(`Booking added successfully. Click here to continue`, {
+            onClick: () => navigate("/user/userAccount")
+          });
+        })        
         .catch((err) => {
           console.error("Error:", err);
         });

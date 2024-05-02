@@ -6,6 +6,8 @@ import { Link, useNavigate } from "react-router-dom";
 import loginImage from "./Images/image.png";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SearchFlightResultSlice from "../../SearchFlightResultSlice";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -74,7 +76,8 @@ else {
         sessionStorage.setItem("token", res.token);
         sessionStorage.setItem("username", res.username);
         sessionStorage.setItem("role", res.role);
-        toast("Login success - " + res.username)
+        toast(`Login success - ${res.username}. Click here to Continue`, {
+          onClick: () => navigate("/searchFlightResult")});
 
         if (sessionStorage.getItem("role") == "flightOwner") {
           var getRequestOptions = {

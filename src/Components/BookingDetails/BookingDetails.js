@@ -28,7 +28,7 @@ export default function BookingDetails() {
 
   const validatename = (Name) => {
     if (!Name) {
-      setNameError("Please enter a name");
+      setNameError("Please enter name");
       return false;
     } else if (/[^a-zA-Z]/.test(Name)) {
       setNameError("Please enter a valid passenger name");
@@ -55,10 +55,10 @@ export default function BookingDetails() {
       setPassportNumberError("Please enter Passport no");
       return false;
     } else if (PassportNumber.length < 8) {
-      setPassportNumberError("It should contain atleast eight characters");
+      setPassportNumberError("passport number should contain atleast eight characters");
       return false;
     } else if (PassportNumber.length > 8) {
-      setPassportNumberError("It should n't exceed eight characters");
+      setPassportNumberError("passport number should n't exceed eight characters");
       return false;
     } 
     else if (PassportNumber.length == 8) {
@@ -113,7 +113,7 @@ export default function BookingDetails() {
       setPassportNumberError("");
     }
     if (!name || !age || !passportNumber) {
-      setFormError("Please fix the errors before logging in.")
+      setFormError("Please make sure that all the fields are correctly filled before logging in.")
       return;
     }
     var isDuplicate = passengers.some(
